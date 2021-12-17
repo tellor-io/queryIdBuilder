@@ -1,0 +1,56 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Form {
+  width: 50%;
+  height: auto;
+  padding: 1% 0;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.Form > label {
+  width: 90%;
+  margin: 1% 0;
+}
+.Form > select {
+  width: 90%;
+  margin: 1% 0;
+}
+.Form > button {
+  width: 30%;
+  margin: 1% 0;
+}
+
+.Form > hr {
+  width: 90%;
+}
+
+.newFeed {
+  width: 40px;
+}
+
+.resultsContainer {
+  width: 50%;
+  height: auto;
+  padding: 1% 0;
+  margin-top: 2%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.results {
+  /* border: 1px solid red; */
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+}
