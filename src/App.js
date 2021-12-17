@@ -115,14 +115,14 @@ function App() {
         <h2>Results</h2>
         <div className="results">
           <p className="resultsJson">
-            JSON: <br />
+            Query Descriptor: <br />
             {jsonString ? JSON.parse(jsonString) : ""}
           </p>
           <p className="resultsBytes">
-            QueryData (Bytes): <br /> {queryData ? queryData : ""}
+            Query Data (Bytes): <br /> {queryData ? queryData : ""}
           </p>
           <p className="resultsHash">
-            QueryID (Hash): <br /> {queryId ? queryId : ""}
+            Query ID (Hash): <br /> {queryId ? queryId : ""}
           </p>
         </div>
       </div>
