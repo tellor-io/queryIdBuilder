@@ -4,6 +4,10 @@
   flex-direction: column;
   align-items: center;
 }
+.App h3 {
+  font-size: 18px;
+  margin: 0 0 20px 0;
+}
 .Form {
   width: 50%;
   height: auto;

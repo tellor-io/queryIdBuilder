@@ -32,9 +32,13 @@ function App() {
     const jsonStringToUse = JSON.stringify(
       `{ type: "SpotPrice", asset: "${form.asset}", currency: "${form.currency}" }`
     );
-    const json_bytes = ethers.utils.toUtf8Bytes(jsonStringToUse);
-    // const half = json_bytes.length % 2;
-    // console.log(half);
+    const newBytesArray = `[SpotPrice, ${form.asset
+      .toString()
+      .toLowerCase()}, ${form.currency.toString().toLowerCase()}]`;
+    const json_bytes = ethers.utils.toUtf8Bytes(newBytesArray);
+    // console.log(json_bytes);
+    // const decoded = String.fromCharCode.apply(null, json_bytes);
+    // console.log(decoded);
     const json_keccak_queryId = ethers.utils.keccak256(json_bytes);
     setJsonString(jsonStringToUse);
     setQueryData(json_bytes);
@@ -45,6 +49,7 @@ function App() {
 
   const handleGetIdFromLegacy = () => {
     const objectToUse = legacyDataHelper(form.currentFeed);
+    console.log(objectToUse);
     setJsonString(objectToUse[0]);
     setQueryData(objectToUse[1]);
     setQueryId(objectToUse[2]);
@@ -53,6 +58,10 @@ function App() {
   return (
     <div className="App">
       <h1>Get A Query ID</h1>
+      <h3>
+        Link to{" "}
+        <a href="https://github.com/tellor-io/dataSpecs">Data Specs Repo</a>
+      </h3>
       <div className="Form">
         <label htmlFor="currentFeed">Current Feeds</label>
         <select
