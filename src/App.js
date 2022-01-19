@@ -34,7 +34,7 @@ function App() {
     );
     const newBytesArray = `[SpotPrice, ${form.asset
       .toString()
-      .toLowerCase()}, ${form.currency.toString().toLowerCase()}]`;
+      .toUpperCase()}, ${form.currency.toString().toUpperCase()}]`;
     const json_bytes = ethers.utils.toUtf8Bytes(newBytesArray);
     // console.log(json_bytes);
     // const decoded = String.fromCharCode.apply(null, json_bytes);
