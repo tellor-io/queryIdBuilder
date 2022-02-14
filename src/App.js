@@ -5,7 +5,8 @@ import { legacyDataHelper } from './helpers'
 import TellorLogo from './assets/tellor_white.svg'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import SelectFeed from './components/SelectFeed'
-import CreateNewFeed from './components/CreateNewFeed'
+import CustomFeed from './components/CustomFeed'
+import SpotPrice from './components/SpotPrice'
 
 const initialFormState = {
   currentFeed: 'none',
@@ -21,14 +22,21 @@ function App() {
   const [queryData, setQueryData] = useState(null)
   const [queryId, setQueryId] = useState(null)
   const [active, setActive] = useState(true)
+  const [inactive, setInactive] = useState(true)
 
   //Helper Functions
   const showJSONString = () => {
     setShowString(!showString)
     setForm(initialFormState)
   }
-  const activeHelper = () => {
-    setActive(!active)
+  const activeHelper = (tab) => {
+    if (tab === 'SelectFeed') {
+      setActive(true)
+      setInactive(true)
+    } else if (tab === 'CreateFeed') {
+      setActive(false)
+      setInactive(false)
+    }
   }
 
   //Form Functions
@@ -87,14 +95,14 @@ function App() {
             <Link
               to="/"
               className={active ? 'ActiveLink' : 'InactiveLink'}
-              onClick={activeHelper}
+              onClick={() => activeHelper('SelectFeed')}
             >
               Select Feed
             </Link>
             <Link
-              to="/create"
-              className={active ? 'InactiveLink' : 'ActiveLink'}
-              onClick={activeHelper}
+              to="/spotprice"
+              className={inactive ? 'InactiveLink' : 'ActiveLink'}
+              onClick={() => activeHelper('CreateFeed')}
             >
               Create New Feed
             </Link>
@@ -102,7 +110,8 @@ function App() {
           <div className="HeroSection">
             <Routes>
               <Route exact path="/" element={<SelectFeed />} />
-              <Route path="/create" element={<CreateNewFeed />} />
+              <Route path="/spotprice" element={<SpotPrice />} />
+              <Route path="/create" element={<CustomFeed />} />
             </Routes>
           </div>
         </Router>

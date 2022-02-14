@@ -1,0 +1,13 @@
+.CustomFeedContainer {
+  margin-top: 50px;
+  display: flex;
+}
+.CustomHero {
+  max-width: 75%;
+  box-sizing: border-box;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-left: 2px solid #ffffff;
+  padding: 12px;
+}
