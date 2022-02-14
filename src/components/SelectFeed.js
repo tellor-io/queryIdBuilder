@@ -1,52 +1,143 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/SelectFeed.css'
-import { Link } from 'react-router-dom'
-
-// const initialFormState = {
-//   selected: '',
-// }
+import { legacyDataHelper } from '../helpers'
+import Clipboard from '../assets/copy.svg'
+import copy from 'copy-to-clipboard'
+import ReactTooltip from 'react-tooltip'
 
 function SelectFeed() {
-  // const [form, setForm] = useState('')
-  // const [checked, setChecked] = useState(false)
+  //Component State
+  const [jsonString, setJsonString] = useState(null)
+  const [queryData, setQueryData] = useState(null)
+  const [queryId, setQueryId] = useState(null)
+
+  //useEffects
+  useEffect(() => {
+    const objectToUse = legacyDataHelper('eth/usd')
+    setJsonString(objectToUse[0])
+    setQueryData(objectToUse[1])
+    setQueryId(objectToUse[2])
+    return () => {
+      setJsonString(null)
+      setQueryData(null)
+      setQueryId(null)
+    }
+  }, [])
+
+  //Helpers
+  const handleGetIdFromLegacy = (feed) => {
+    const objectToUse = legacyDataHelper(feed)
+    const target = document.getElementById(feed)
+    const classes = document.querySelectorAll('.RadioButtonInner')
+    classes.forEach((el) => el.classList.remove('display'))
+    target.classList.add('display')
+    setJsonString(objectToUse[0])
+    setQueryData(objectToUse[1])
+    setQueryId(objectToUse[2])
+  }
+  const copyToClipboard = (text) => {
+    copy(text)
+  }
 
   return (
     <div className="SelectFeedContainer">
       <div className="RadioSelect">
-        <div className="Selection">
-          <Link>ETH/USD</Link>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromLegacy('eth/usd')}
+        >
+          <div className="RadioButton">
+            <div id="eth/usd" className="RadioButtonInner display"></div>
+          </div>
+          <span>ETH/USD</span>
         </div>
-        <div className="Selection">
-          <Link>BTC/USD</Link>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromLegacy('btc/usd')}
+        >
+          <div className="RadioButton">
+            <div id="btc/usd" className="RadioButtonInner"></div>
+          </div>
+          <span>BTC/USD</span>
         </div>
-        <div className="Selection">
-          <label className="container" for="AMPL/USD">
-            <input type="checkbox" />
-            <span className="checkmark"></span>
-            AMPL/USD
-          </label>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromLegacy('ampl/usd')}
+        >
+          <div className="RadioButton">
+            <div id="ampl/usd" className="RadioButtonInner"></div>
+          </div>
+          <span>AMPL/USD</span>
         </div>
-        <div className="Selection">
-          <label className="container" for="USPCE">
-            <input type="checkbox" />
-            <span className="checkmark"></span>
-            USPCE
-          </label>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromLegacy('uspce')}
+        >
+          <div className="RadioButton">
+            <div id="uspce" className="RadioButtonInner"></div>
+          </div>
+          <span>USPCE</span>
         </div>
-        <div className="Selection">
-          <label className="container" for="TRB/USD">
-            <input type="checkbox" />
-            <span className="checkmark"></span>
-            TRB/USD
-          </label>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromLegacy('trb/usd')}
+        >
+          <div className="RadioButton">
+            <div id="trb/usd" className="RadioButtonInner"></div>
+          </div>
+          <span>TRB/USD</span>
         </div>
-        <div className="Selection">
-          <label className="container" for="ETH/JPY">
-            <input type="checkbox" />
-            <span className="checkmark"></span>
-            ETH/JPY
-          </label>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromLegacy('eth/jpy')}
+        >
+          <div className="RadioButton">
+            <div id="eth/jpy" className="RadioButtonInner"></div>
+          </div>
+          <span>ETH/JPY</span>
         </div>
+      </div>
+      <div className="SelectFeedResults">
+        <div className="ResultTitle">
+          <p>Query Descriptor:</p>
+          <img
+            data-tip="Copied!"
+            src={Clipboard}
+            alt="copyToClipboardIcon"
+            className="CopyToClipboardIcon"
+            onClick={() =>
+              copyToClipboard(jsonString ? JSON.parse(jsonString) : 'n/a')
+            }
+          />
+          <ReactTooltip delayHide={1000} event="click" />
+        </div>
+        <p className="ResultContent">
+          {jsonString ? JSON.parse(jsonString) : ''}
+        </p>
+        <div className="ResultTitle">
+          <p>Query Data (Bytes):</p>
+          <img
+            data-tip="Copied!"
+            src={Clipboard}
+            alt="copyToClipboardIcon"
+            className="CopyToClipboardIcon"
+            onClick={() => copyToClipboard(queryData ? queryData : 'n/a')}
+          />
+          <ReactTooltip delayHide={1000} event="click" />
+        </div>
+        <p className="ResultContent">{queryData ? queryData : ''}</p>
+        <div className="ResultTitle">
+          <p>Query ID (Hash):</p>
+          <img
+            data-tip="Copied!"
+            src={Clipboard}
+            alt="copyToClipboardIcon"
+            className="CopyToClipboardIcon"
+            onClick={() => copyToClipboard(queryId ? queryId : 'n/a')}
+          />
+          <ReactTooltip delayHide={1000} event="click" />
+        </div>
+        <p className="ResultContent">{queryId ? queryId : ''}</p>
       </div>
     </div>
   )

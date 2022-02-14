@@ -107,7 +107,7 @@ function App() {
           </div>
         </Router>
 
-        <div className="Form">
+        {/* <div className="Form">
           <label htmlFor="currentFeed">Current Feeds</label>
           <select
             disabled={showString}
@@ -169,22 +169,7 @@ function App() {
           >
             Get ID
           </button>
-        </div>
-        <div className="resultsContainer">
-          <h2>Results</h2>
-          <div className="results">
-            <p className="resultsJson">
-              Query Descriptor: <br />
-              {jsonString ? JSON.parse(jsonString) : ''}
-            </p>
-            <p className="resultsBytes">
-              Query Data (Bytes): <br /> {queryData ? queryData : ''}
-            </p>
-            <p className="resultsHash">
-              Query ID (Hash): <br /> {queryId ? queryId : ''}
-            </p>
-          </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
