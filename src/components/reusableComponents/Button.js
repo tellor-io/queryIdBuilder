@@ -19,7 +19,7 @@ const Button = ({ children, props, onClick }) => {
     }
   }, [props])
 
-  console.log(clickMethod)
+  // console.log(clickMethod)
 
   return (
     <button

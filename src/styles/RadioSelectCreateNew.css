@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-around;
   min-width: 12.5%;
+  height: 75px;
 }
 .SelectionCreateNew {
   display: flex;
