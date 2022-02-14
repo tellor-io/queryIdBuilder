@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import '../styles/SelectFeed.css'
 import { legacyDataHelper } from '../helpers'
 import Clipboard from '../assets/copy.svg'
@@ -36,7 +36,11 @@ function SelectFeed() {
     setQueryId(objectToUse[2])
   }
   const copyToClipboard = (text) => {
-    copy(text)
+    if (typeof text === 'object') {
+      copy(text.join(''))
+    } else {
+      copy(text)
+    }
   }
 
   return (
@@ -101,7 +105,6 @@ function SelectFeed() {
         <div className="ResultTitle">
           <p>Query Descriptor:</p>
           <img
-            data-tip="Copied!"
             src={Clipboard}
             alt="copyToClipboardIcon"
             className="CopyToClipboardIcon"
@@ -109,7 +112,6 @@ function SelectFeed() {
               copyToClipboard(jsonString ? JSON.parse(jsonString) : 'n/a')
             }
           />
-          <ReactTooltip delayHide={1000} event="click" />
         </div>
         <p className="ResultContent">
           {jsonString ? JSON.parse(jsonString) : ''}
@@ -117,25 +119,21 @@ function SelectFeed() {
         <div className="ResultTitle">
           <p>Query Data (Bytes):</p>
           <img
-            data-tip="Copied!"
             src={Clipboard}
             alt="copyToClipboardIcon"
             className="CopyToClipboardIcon"
             onClick={() => copyToClipboard(queryData ? queryData : 'n/a')}
           />
-          <ReactTooltip delayHide={1000} event="click" />
         </div>
         <p className="ResultContent">{queryData ? queryData : ''}</p>
         <div className="ResultTitle">
           <p>Query ID (Hash):</p>
           <img
-            data-tip="Copied!"
             src={Clipboard}
             alt="copyToClipboardIcon"
             className="CopyToClipboardIcon"
             onClick={() => copyToClipboard(queryId ? queryId : 'n/a')}
           />
-          <ReactTooltip delayHide={1000} event="click" />
         </div>
         <p className="ResultContent">{queryId ? queryId : ''}</p>
       </div>
