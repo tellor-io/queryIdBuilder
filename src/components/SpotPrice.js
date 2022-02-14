@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/SpotPrice.css'
-import Button from './reusableComponents/Button'
+import '../styles/Button.css'
 import RadioButtonCreateNew from './reusableComponents/RadioSelectCreateNew'
 import Clipboard from '../assets/copy.svg'
 import { ethers } from 'ethers'
 import copy from 'copy-to-clipboard'
+
+export const ButtonContext = React.createContext()
 
 const initialFormState = {
   asset: '',
@@ -20,7 +22,6 @@ const SpotPrice = () => {
   const [showResults, setShowResults] = useState(false)
   //Globals
   const abiCoder = new ethers.utils.AbiCoder()
-
   //Helpers
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
@@ -64,8 +65,10 @@ const SpotPrice = () => {
       <RadioButtonCreateNew props="SpotPrice" />
       <div className="SpotPriceHeroContainer">
         <div className="SpotPriceHero">
-          <p className="SpotPriceJSON">
-            &#123;"type": "SpotPrice", "asset":{' '}
+          <div className="SpotPriceJSON">
+            <p>
+              &#123;<span>"type": </span>"SpotPrice", <span>"asset": </span>
+            </p>
             <input
               onChange={handleChange}
               value={form.asset}
@@ -74,7 +77,9 @@ const SpotPrice = () => {
               type="text"
               className="SpotPriceInput"
             />
-            , "currency":{' '}
+            <p>
+              , <span>"currency": </span>
+            </p>
             <input
               onChange={handleChange}
               value={form.currency}
@@ -83,11 +88,17 @@ const SpotPrice = () => {
               type="text"
               className="SpotPriceInput"
             />
-            &#125;
-          </p>
-          <Button props={form} onClick={handleGetSpotPriceId}>
+            <p>&#125;</p>
+          </div>
+          <button
+            disabled={form.asset && form.currency ? false : true}
+            className={
+              form.asset && form.currency ? 'Button' : 'ButtonDisabled'
+            }
+            onClick={handleGetSpotPriceId}
+          >
             Generate ID
-          </Button>
+          </button>
         </div>
         {showResults ? (
           <div className="SpotPriceResults">

@@ -21,3 +21,7 @@
 .ButtonDisabled:hover {
   cursor: not-allowed;
 }
+
+#ButtonSpecial {
+  margin-right: 10px;
+}

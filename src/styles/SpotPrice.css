@@ -18,11 +18,19 @@
   padding-left: 20px;
 }
 .SpotPriceJSON {
+  display: flex;
+  align-items: baseline;
   margin-bottom: 15px;
   font-weight: 300;
   width: fit-content;
 }
+.SpotPriceJSON > p > span {
+  font-weight: 700;
+}
 .SpotPriceInput {
+  font-family: 'Inconsolata';
+  font-size: 16px;
+  font-weight: 300;
   width: 45px;
   height: 22px;
   padding-left: 5px;
