@@ -1,0 +1,16 @@
+.SelectFeedContainer {
+  margin-top: 50px;
+}
+.RadioSelect {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 15%;
+  border: 1px solid red;
+}
+.Selection {
+  margin-bottom: 10px;
+}
+.Selection > label {
+  font-weight: 300;
+}
