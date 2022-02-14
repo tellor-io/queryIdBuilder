@@ -11,3 +11,22 @@
   border-left: 2px solid #ffffff;
   padding: 12px;
 }
+.CustomJSON {
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+.CustomInput {
+  width: fit-content;
+  height: 22px;
+  padding-left: 5px;
+  padding-top: 2px;
+  border: none;
+  background-color: rgba(32, 240, 146, 0.2);
+  border-bottom: 2px solid #20f092;
+  color: #ffffff;
+  caret-color: #ffffff;
+}
+.CustomInput:focus {
+  outline-color: #20f092;
+  outline-width: 1px;
+}

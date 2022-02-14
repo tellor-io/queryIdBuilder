@@ -4,7 +4,6 @@ import Button from './reusableComponents/Button'
 import RadioButtonCreateNew from './reusableComponents/RadioSelectCreateNew'
 
 const initialFormState = {
-  currentFeed: 'none',
   asset: '',
   currency: '',
 }
@@ -20,7 +19,7 @@ const SpotPrice = () => {
 
   return (
     <div className="CreateNewSpotPriceContainer">
-      <RadioButtonCreateNew />
+      <RadioButtonCreateNew props="SpotPrice" />
       <div className="SpotPriceHero">
         <p className="SpotPriceJSON">
           &#123;"type": "SpotPrice", "asset":{' '}

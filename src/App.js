@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import { ethers } from 'ethers'
 import { legacyDataHelper } from './helpers'
@@ -23,6 +23,8 @@ function App() {
   const [queryId, setQueryId] = useState(null)
   const [active, setActive] = useState(true)
   const [inactive, setInactive] = useState(true)
+
+  useEffect(() => {})
 
   //Helper Functions
   const showJSONString = () => {

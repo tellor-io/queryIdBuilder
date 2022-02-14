@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../styles/RadioSelectCreateNew.css'
 import { Link } from 'react-router-dom'
 
-const RadioSelectCreateNew = () => {
+const RadioSelectCreateNew = ({ props }) => {
   //Component State
   const [active, setActive] = useState(true)
   const [inactive, setInactive] = useState(true)
   //Handlers
+  useEffect(() => {
+    if (props === 'SpotPrice') {
+      setActive(true)
+      setInactive(true)
+    } else if (props === 'Custom') {
+      setActive(false)
+      setInactive(false)
+    }
+  }, [])
+
   const handleSwitching = (tab) => {
-    console.log(tab)
     if (tab === 'SpotPrice') {
       setActive(true)
       setInactive(true)
@@ -17,8 +26,7 @@ const RadioSelectCreateNew = () => {
       setInactive(false)
     }
   }
-  console.log(active)
-  console.log(inactive)
+
   return (
     <div className="RadioSelectCreateNew">
       <Link
