@@ -15,7 +15,7 @@ const RadioSelectCreateNew = ({ props }) => {
       setActive(false)
       setInactive(false)
     }
-  }, [])
+  }, [props])
 
   const handleSwitching = (tab) => {
     if (tab === 'SpotPrice') {

@@ -4,6 +4,7 @@ import { legacyDataHelper } from '../helpers'
 import Clipboard from '../assets/copy.svg'
 import copy from 'copy-to-clipboard'
 import { CustomTooltip } from './reusableComponents/CustomTooltip'
+import ReactGA from 'react-ga'
 
 function SelectFeed() {
   //Component State
@@ -14,6 +15,10 @@ function SelectFeed() {
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
 
+  //useEffects for GA
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname)
+  }, [])
   //useEffects
   useEffect(() => {
     const objectToUse = legacyDataHelper('eth/usd')
@@ -28,7 +33,8 @@ function SelectFeed() {
   }, [])
 
   //Helpers
-  const handleGetIdFromLegacy = (feed) => {
+  const handleGetIdFromLegacy = (e, feed) => {
+    console.log(e.target)
     const objectToUse = legacyDataHelper(feed)
     const target = document.getElementById(feed)
     const classes = document.querySelectorAll('.RadioButtonInner')
@@ -81,7 +87,7 @@ function SelectFeed() {
       <div className="RadioSelect">
         <div
           className="Selection"
-          onClick={() => handleGetIdFromLegacy('eth/usd')}
+          onClick={(e) => handleGetIdFromLegacy(e, 'eth/usd')}
         >
           <div className="RadioButton">
             <div id="eth/usd" className="RadioButtonInner display"></div>
