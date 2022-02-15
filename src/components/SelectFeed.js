@@ -4,7 +4,6 @@ import { legacyDataHelper } from '../helpers'
 import Clipboard from '../assets/copy.svg'
 import copy from 'copy-to-clipboard'
 import { CustomTooltip } from './reusableComponents/CustomTooltip'
-import ReactGA from 'react-ga'
 
 function SelectFeed() {
   //Component State
@@ -15,10 +14,6 @@ function SelectFeed() {
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
 
-  //useEffects for GA
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname)
-  }, [])
   //useEffects
   useEffect(() => {
     const objectToUse = legacyDataHelper('eth/usd')
@@ -33,16 +28,26 @@ function SelectFeed() {
   }, [])
 
   //Helpers
-  const handleGetIdFromLegacy = (e, feed) => {
-    console.log(e.target)
-    const objectToUse = legacyDataHelper(feed)
+  const handleTransition = () => {
+    const container = document.querySelector('.TransitionContainer')
+    container.classList.add('SelectionHidden')
+    setTimeout(() => {
+      container.classList.remove('SelectionHidden')
+      container.classList.add('SelectionVisible')
+    }, 300)
+  }
+  const handleGetIdFromLegacy = (feed) => {
+    handleTransition()
     const target = document.getElementById(feed)
     const classes = document.querySelectorAll('.RadioButtonInner')
     classes.forEach((el) => el.classList.remove('display'))
     target.classList.add('display')
-    setJsonString(objectToUse[0])
-    setQueryData(objectToUse[1])
-    setQueryId(objectToUse[2])
+    setTimeout(() => {
+      const objectToUse = legacyDataHelper(feed)
+      setJsonString(objectToUse[0])
+      setQueryData(objectToUse[1])
+      setQueryId(objectToUse[2])
+    }, 305)
   }
   //Clipboard Functions
   //Can both be consolidated at
@@ -87,7 +92,7 @@ function SelectFeed() {
       <div className="RadioSelect">
         <div
           className="Selection"
-          onClick={(e) => handleGetIdFromLegacy(e, 'eth/usd')}
+          onClick={() => handleGetIdFromLegacy('eth/usd')}
         >
           <div className="RadioButton">
             <div id="eth/usd" className="RadioButtonInner display"></div>
@@ -141,60 +146,64 @@ function SelectFeed() {
         </div>
       </div>
       <div className="SelectFeedResults">
-        <div className="ResultTitle">
-          <p>Query Descriptor:</p>
-          <CustomTooltip
-            open={tooltipOpen0}
-            title="Copied!"
-            placement="right"
-            arrow
-          >
-            <img
-              src={Clipboard}
-              alt="copyToClipboardIcon"
-              className="CopyToClipboardIcon"
-              onClick={() => clipboardConsolidator(JSON.parse(jsonString), '0')}
-            />
-          </CustomTooltip>
+        <div className="TransitionContainer" onChange={handleTransition}>
+          <div className="ResultTitle">
+            <p>Query Descriptor:</p>
+            <CustomTooltip
+              open={tooltipOpen0}
+              title="Copied!"
+              placement="right"
+              arrow
+            >
+              <img
+                src={Clipboard}
+                alt="copyToClipboardIcon"
+                className="CopyToClipboardIcon"
+                onClick={() =>
+                  clipboardConsolidator(JSON.parse(jsonString), '0')
+                }
+              />
+            </CustomTooltip>
+          </div>
+          <p className="ResultContent">
+            {jsonString ? JSON.parse(jsonString) : ''}
+          </p>
+          <div className="ResultTitle">
+            <p>Query Data (Bytes):</p>
+            <CustomTooltip
+              id="1"
+              open={tooltipOpen1}
+              title="Copied!"
+              placement="right"
+              arrow
+            >
+              <img
+                src={Clipboard}
+                alt="copyToClipboardIcon"
+                className="CopyToClipboardIcon"
+                onClick={() => clipboardConsolidator(queryData, '1')}
+              />
+            </CustomTooltip>
+          </div>
+          <p className="ResultContent">{queryData ? queryData : ''}</p>
+          <div className="ResultTitle">
+            <p>Query ID (Hash):</p>
+            <CustomTooltip
+              open={tooltipOpen2}
+              title="Copied!"
+              placement="right"
+              arrow
+            >
+              <img
+                src={Clipboard}
+                alt="copyToClipboardIcon"
+                className="CopyToClipboardIcon"
+                onClick={() => clipboardConsolidator(queryId, '2')}
+              />
+            </CustomTooltip>
+          </div>
+          <p className="ResultContent">{queryId ? queryId : ''}</p>
         </div>
-        <p className="ResultContent">
-          {jsonString ? JSON.parse(jsonString) : ''}
-        </p>
-        <div className="ResultTitle">
-          <p>Query Data (Bytes):</p>
-          <CustomTooltip
-            id="1"
-            open={tooltipOpen1}
-            title="Copied!"
-            placement="right"
-            arrow
-          >
-            <img
-              src={Clipboard}
-              alt="copyToClipboardIcon"
-              className="CopyToClipboardIcon"
-              onClick={() => clipboardConsolidator(queryData, '1')}
-            />
-          </CustomTooltip>
-        </div>
-        <p className="ResultContent">{queryData ? queryData : ''}</p>
-        <div className="ResultTitle">
-          <p>Query ID (Hash):</p>
-          <CustomTooltip
-            open={tooltipOpen2}
-            title="Copied!"
-            placement="right"
-            arrow
-          >
-            <img
-              src={Clipboard}
-              alt="copyToClipboardIcon"
-              className="CopyToClipboardIcon"
-              onClick={() => clipboardConsolidator(queryId, '2')}
-            />
-          </CustomTooltip>
-        </div>
-        <p className="ResultContent">{queryId ? queryId : ''}</p>
       </div>
     </div>
   )

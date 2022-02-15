@@ -6,7 +6,7 @@ const RadioSelectCreateNew = ({ props }) => {
   //Component State
   const [active, setActive] = useState(true)
   const [inactive, setInactive] = useState(true)
-  //Handlers
+  //useEffect for setting tabs correctly onload
   useEffect(() => {
     if (props === 'SpotPrice') {
       setActive(true)
@@ -16,7 +16,7 @@ const RadioSelectCreateNew = ({ props }) => {
       setInactive(false)
     }
   }, [props])
-
+  //Handlers
   const handleSwitching = (tab) => {
     if (tab === 'SpotPrice') {
       setActive(true)

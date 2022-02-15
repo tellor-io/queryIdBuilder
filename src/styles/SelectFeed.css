@@ -22,12 +22,12 @@
 .SelectionVisible {
   visibility: visible;
   opacity: 1;
-  transition: opacity 2s linear;
+  transition: opacity 0.2s linear;
 }
 .SelectionHidden {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s 2s, opacity 2s linear;
+  transition: visibility 0s 0.2s, opacity 0.2s linear;
 }
 .RadioButton {
   border: 1px solid #ffffff;
