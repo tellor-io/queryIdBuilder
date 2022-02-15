@@ -47,7 +47,7 @@ const RadioSelectCreateNew = ({ props }) => {
         <span>SpotPrice</span>
       </Link>
       <Link
-        to="/create"
+        to="/custom"
         className="SelectionCreateNew"
         onClick={() => handleSwitching('Custom')}
       >

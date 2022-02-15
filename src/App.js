@@ -72,7 +72,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<SelectFeed />} />
               <Route path="/spotprice" element={<SpotPrice />} />
-              <Route path="/create" element={<CustomFeed />} />
+              <Route path="/custom" element={<CustomFeed />} />
             </Routes>
           </div>
         </Router>
