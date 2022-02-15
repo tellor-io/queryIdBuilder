@@ -7,6 +7,7 @@ import RadioSelectCreateNew from './reusableComponents/RadioSelectCreateNew'
 import { ethers } from 'ethers'
 import copy from 'copy-to-clipboard'
 import { CustomTooltip } from './reusableComponents/CustomTooltip'
+import ReactGA from 'react-ga'
 
 const initialFormState = {
   type: '',
@@ -28,12 +29,15 @@ function CustomFeed() {
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
   //Globals
   const abiCoder = new ethers.utils.AbiCoder()
-
+  //useEffects for GA
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname)
+  }, [])
   //For Button Disabling
   useEffect(() => {
     let array = []
     dynamicFormValues &&
-      dynamicFormValues.map((obj) => {
+      dynamicFormValues.forEach((obj) => {
         if (obj.dataType && obj.argValue) {
           array.push(1)
         } else {

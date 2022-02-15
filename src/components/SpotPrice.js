@@ -6,6 +6,7 @@ import Clipboard from '../assets/copy.svg'
 import { ethers } from 'ethers'
 import copy from 'copy-to-clipboard'
 import { CustomTooltip } from './reusableComponents/CustomTooltip'
+import ReactGA from 'react-ga'
 
 export const ButtonContext = React.createContext()
 
@@ -26,6 +27,10 @@ const SpotPrice = () => {
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
   //Globals
   const abiCoder = new ethers.utils.AbiCoder()
+  //useEffects for GA
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname)
+  }, [])
   //Helpers
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
