@@ -5,17 +5,12 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import SelectFeed from './components/SelectFeed'
 import CustomFeed from './components/CustomFeed'
 import SpotPrice from './components/SpotPrice'
-import ReactGA from 'react-ga'
 
 function App() {
   //Component State
   const [active, setActive] = useState(true)
   const [inactive, setInactive] = useState(true)
 
-  //useEffects for GA
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname)
-  }, [])
   //useEffect for routing
   useEffect(() => {
     if (
