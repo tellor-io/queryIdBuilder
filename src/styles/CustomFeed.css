@@ -2,6 +2,9 @@
   margin-top: 50px;
   display: flex;
 }
+.CustomFeedHeroContainer {
+  width: 100%;
+}
 .CustomHero {
   max-width: 75%;
   box-sizing: border-box;
@@ -105,4 +108,14 @@
 }
 .DeleteIconContainer:hover {
   cursor: pointer;
+}
+.CustomFeedResults {
+  max-width: 75%;
+  box-sizing: border-box;
+  width: 100%;
+  height: fit-content;
+  border: 2px solid #ffffff;
+  padding: 12px;
+  padding-bottom: 0px;
+  margin-top: 40px;
 }
