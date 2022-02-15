@@ -146,7 +146,7 @@ function SelectFeed() {
         </div>
       </div>
       <div className="SelectFeedResults">
-        <div className="TransitionContainer" onChange={handleTransition}>
+        <div className="TransitionContainer">
           <div className="ResultTitle">
             <p>Query Descriptor:</p>
             <CustomTooltip
