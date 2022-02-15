@@ -1,15 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/SelectFeed.css'
 import { legacyDataHelper } from '../helpers'
 import Clipboard from '../assets/copy.svg'
 import copy from 'copy-to-clipboard'
-import ReactTooltip from 'react-tooltip'
+import { CustomTooltip } from './reusableComponents/CustomTooltip'
 
 function SelectFeed() {
   //Component State
   const [jsonString, setJsonString] = useState(null)
   const [queryData, setQueryData] = useState(null)
   const [queryId, setQueryId] = useState(null)
+  const [tooltipOpen0, setTooltipOpen0] = useState(false)
+  const [tooltipOpen1, setTooltipOpen1] = useState(false)
+  const [tooltipOpen2, setTooltipOpen2] = useState(false)
 
   //useEffects
   useEffect(() => {
@@ -35,6 +38,9 @@ function SelectFeed() {
     setQueryData(objectToUse[1])
     setQueryId(objectToUse[2])
   }
+  //Clipboard Functions
+  //Can both be consolidated at
+  //higher level later.
   const copyToClipboard = (text) => {
     if (typeof text === 'object') {
       copy(text.join(''))
@@ -42,10 +48,33 @@ function SelectFeed() {
       copy(text)
     }
   }
-
-  ////////////////
-  // FIGURE OUT TOOLTIP
-  ///////////////
+  const clipboardConsolidator = (content, num) => {
+    switch (num) {
+      case '0':
+        setTooltipOpen0(true)
+        copyToClipboard(content)
+        setTimeout(() => {
+          setTooltipOpen0(false)
+        }, 2000)
+        break
+      case '1':
+        setTooltipOpen1(true)
+        copyToClipboard(content)
+        setTimeout(() => {
+          setTooltipOpen1(false)
+        }, 2000)
+        break
+      case '2':
+        setTooltipOpen2(true)
+        copyToClipboard(content)
+        setTimeout(() => {
+          setTooltipOpen2(false)
+        }, 2000)
+        break
+      default:
+        return
+    }
+  }
 
   return (
     <div className="SelectFeedContainer">
@@ -108,36 +137,56 @@ function SelectFeed() {
       <div className="SelectFeedResults">
         <div className="ResultTitle">
           <p>Query Descriptor:</p>
-          <img
-            src={Clipboard}
-            alt="copyToClipboardIcon"
-            className="CopyToClipboardIcon"
-            onClick={() =>
-              copyToClipboard(jsonString ? JSON.parse(jsonString) : 'n/a')
-            }
-          />
+          <CustomTooltip
+            open={tooltipOpen0}
+            title="Copied!"
+            placement="right"
+            arrow
+          >
+            <img
+              src={Clipboard}
+              alt="copyToClipboardIcon"
+              className="CopyToClipboardIcon"
+              onClick={() => clipboardConsolidator(JSON.parse(jsonString), '0')}
+            />
+          </CustomTooltip>
         </div>
         <p className="ResultContent">
           {jsonString ? JSON.parse(jsonString) : ''}
         </p>
         <div className="ResultTitle">
           <p>Query Data (Bytes):</p>
-          <img
-            src={Clipboard}
-            alt="copyToClipboardIcon"
-            className="CopyToClipboardIcon"
-            onClick={() => copyToClipboard(queryData ? queryData : 'n/a')}
-          />
+          <CustomTooltip
+            id="1"
+            open={tooltipOpen1}
+            title="Copied!"
+            placement="right"
+            arrow
+          >
+            <img
+              src={Clipboard}
+              alt="copyToClipboardIcon"
+              className="CopyToClipboardIcon"
+              onClick={() => clipboardConsolidator(queryData, '1')}
+            />
+          </CustomTooltip>
         </div>
         <p className="ResultContent">{queryData ? queryData : ''}</p>
         <div className="ResultTitle">
           <p>Query ID (Hash):</p>
-          <img
-            src={Clipboard}
-            alt="copyToClipboardIcon"
-            className="CopyToClipboardIcon"
-            onClick={() => copyToClipboard(queryId ? queryId : 'n/a')}
-          />
+          <CustomTooltip
+            open={tooltipOpen2}
+            title="Copied!"
+            placement="right"
+            arrow
+          >
+            <img
+              src={Clipboard}
+              alt="copyToClipboardIcon"
+              className="CopyToClipboardIcon"
+              onClick={() => clipboardConsolidator(queryId, '2')}
+            />
+          </CustomTooltip>
         </div>
         <p className="ResultContent">{queryId ? queryId : ''}</p>
       </div>

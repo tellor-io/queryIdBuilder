@@ -6,6 +6,7 @@ import Delete from '../assets/exit.svg'
 import RadioSelectCreateNew from './reusableComponents/RadioSelectCreateNew'
 import { ethers } from 'ethers'
 import copy from 'copy-to-clipboard'
+import { CustomTooltip } from './reusableComponents/CustomTooltip'
 
 const initialFormState = {
   type: '',
@@ -17,10 +18,14 @@ function CustomFeed() {
   const [args, setArgs] = useState([])
   const [dynamicFormValues, setDynamicFormValues] = useState([])
   const [formFilledOut, setFormFilledOut] = useState(false)
-  const [jsonString, setJsonString] = useState()
-  const [queryData, setQueryData] = useState()
-  const [queryId, setQueryId] = useState()
+  const [jsonString, setJsonString] = useState(null)
+  const [queryData, setQueryData] = useState(null)
+  const [queryId, setQueryId] = useState(null)
   const [showResults, setShowResults] = useState(false)
+  const [errMessage, setErrMessage] = useState(null)
+  const [tooltipOpen0, setTooltipOpen0] = useState(false)
+  const [tooltipOpen1, setTooltipOpen1] = useState(false)
+  const [tooltipOpen2, setTooltipOpen2] = useState(false)
   //Globals
   const abiCoder = new ethers.utils.AbiCoder()
 
@@ -43,7 +48,12 @@ function CustomFeed() {
     setFormValues({ ...formValues, [event.target.name]: event.target.value })
   }
   const handleDynamicChange = (index, event) => {
-    let newDynamicFormValues = [...dynamicFormValues]
+    let newDynamicFormValues
+    if (event.target.name === 'dataType') {
+      newDynamicFormValues = [...dynamicFormValues]
+      newDynamicFormValues[index]['argValue'] = ''
+    }
+    newDynamicFormValues = [...dynamicFormValues]
     newDynamicFormValues[index][event.target.name] = event.target.value
     setDynamicFormValues(newDynamicFormValues)
     setArgs(newDynamicFormValues)
@@ -58,44 +68,74 @@ function CustomFeed() {
     setArgs(newDynamicFormValues)
   }
   const handleGetCustomFeed = (type, form) => {
-    //Getting JSON object
-    let object = form.reduce((acc, curr, index) => {
-      let indexer = `arg${index + 1}`.toString()
-      acc[indexer] = curr.argValue.toString()
-      return acc
-    }, {})
-    let merged = { ...type, ...object }
-    const jsonStringToUse = JSON.stringify(merged)
-    //Getting queryDataArgs
-    let types = []
-    let values = []
-    form.forEach((arg) => {
-      types.push(arg.dataType)
-      values.push(arg.argValue)
-    })
-    const queryDataArgs = abiCoder.encode(types, values)
-    //Getting queryData
-    const queryData = abiCoder.encode(
-      ['string', 'bytes'],
-      [type.type.toString(), queryDataArgs]
-    )
-    //Setting QueryId
-    const queryId = ethers.utils.keccak256(queryData)
-    //Setting Result State
-    setJsonString(jsonStringToUse.toString())
-    setQueryData(queryData)
-    setQueryId(queryId)
-    //Resetting Form State
-    // setFormValues(initialFormState)
-    // setDynamicFormValues([])
-    // setArgs([])
-    setShowResults(true)
+    setErrMessage(null)
+    try {
+      //Getting JSON object
+      let object = form.reduce((acc, curr, index) => {
+        let indexer = `arg${index + 1}`.toString()
+        acc[indexer] = curr.argValue.toString()
+        return acc
+      }, {})
+      let merged = { ...type, ...object }
+      const jsonStringToUse = JSON.stringify(merged)
+      //Getting queryDataArgs
+      let types = []
+      let values = []
+      form.forEach((arg) => {
+        types.push(arg.dataType)
+        values.push(arg.argValue)
+      })
+      const queryDataArgs = abiCoder.encode(types, values)
+      //Getting queryData
+      const queryData = abiCoder.encode(
+        ['string', 'bytes'],
+        [type.type.toString(), queryDataArgs]
+      )
+      //Setting QueryId
+      const queryId = ethers.utils.keccak256(queryData)
+      //Setting Result State
+      setJsonString(jsonStringToUse.toString())
+      setQueryData(queryData)
+      setQueryId(queryId)
+      //Resetting Form State
+      //Maybe uncomment in future?
+      // setFormValues(initialFormState)
+      // setDynamicFormValues([])
+      // setArgs([])
+      setShowResults(true)
+    } catch (err) {
+      setErrMessage(err.message)
+      setShowResults(false)
+    }
   }
-  const copyToClipboard = (text) => {
-    if (typeof text === 'object') {
-      copy(text.join(''))
-    } else {
-      copy(text)
+  //Clipboard Function
+  //Can both be consolidated at
+  //higher level later.
+  const clipboardConsolidator = (content, num) => {
+    switch (num) {
+      case '0':
+        setTooltipOpen0(true)
+        copy(content)
+        setTimeout(() => {
+          setTooltipOpen0(false)
+        }, 2000)
+        break
+      case '1':
+        setTooltipOpen1(true)
+        copy(content)
+        setTimeout(() => {
+          setTooltipOpen1(false)
+        }, 2000)
+        break
+      case '2':
+        setTooltipOpen2(true)
+        copy(content)
+        setTimeout(() => {
+          setTooltipOpen2(false)
+        }, 2000)
+        break
+      default:
+        return
     }
   }
 
@@ -150,14 +190,30 @@ function CustomFeed() {
                 <option value="string">string</option>
                 <option value="uint256">uint256</option>
               </select>
-              <input
-                type="text"
-                name="argValue"
-                className="DynamicFormInput"
-                value={element.argValue}
-                onChange={(e) => handleDynamicChange(i, e)}
-                placeholder="Argument Value"
-              />
+              {dynamicFormValues[i].dataType === 'bool' ? (
+                <select
+                  id="BoolDropdown"
+                  name="argValue"
+                  className="DynamicFormDropdown"
+                  value={element.argValue}
+                  onChange={(e) => handleDynamicChange(i, e)}
+                >
+                  <option value="" disabled>
+                    Select Value
+                  </option>
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+              ) : (
+                <input
+                  type="text"
+                  name="argValue"
+                  className="DynamicFormInput"
+                  value={element.argValue}
+                  onChange={(e) => handleDynamicChange(i, e)}
+                  placeholder="Argument Value"
+                />
+              )}
               <div
                 className="DeleteIconContainer"
                 onClick={() => handleRemoveFields(i)}
@@ -166,6 +222,12 @@ function CustomFeed() {
               </div>
             </div>
           ))}
+          {errMessage ? (
+            <div className="ErrorMessage">
+              <span>ERROR: </span>
+              {errMessage}
+            </div>
+          ) : null}
           <button
             id="ButtonSpecial"
             disabled={formValues.type ? false : true}
@@ -188,32 +250,53 @@ function CustomFeed() {
           <div className="CustomFeedResults">
             <div className="ResultTitle">
               <p>Query Descriptor:</p>
-              <img
-                src={Clipboard}
-                alt="copyToClipboardIcon"
-                className="CopyToClipboardIcon"
-                onClick={() => copyToClipboard(jsonString ? jsonString : 'n/a')}
-              />
+              <CustomTooltip
+                open={tooltipOpen0}
+                title="Copied!"
+                placement="right"
+                arrow
+              >
+                <img
+                  src={Clipboard}
+                  alt="copyToClipboardIcon"
+                  className="CopyToClipboardIcon"
+                  onClick={() => clipboardConsolidator(jsonString, '0')}
+                />
+              </CustomTooltip>
             </div>
             <p className="ResultContent">{jsonString ? jsonString : ''}</p>
             <div className="ResultTitle">
               <p>Query Data (Bytes):</p>
-              <img
-                src={Clipboard}
-                alt="copyToClipboardIcon"
-                className="CopyToClipboardIcon"
-                onClick={() => copyToClipboard(queryData ? queryData : 'n/a')}
-              />
+              <CustomTooltip
+                open={tooltipOpen1}
+                title="Copied!"
+                placement="right"
+                arrow
+              >
+                <img
+                  src={Clipboard}
+                  alt="copyToClipboardIcon"
+                  className="CopyToClipboardIcon"
+                  onClick={() => clipboardConsolidator(queryData, '1')}
+                />
+              </CustomTooltip>
             </div>
             <p className="ResultContent">{queryData ? queryData : ''}</p>
             <div className="ResultTitle">
               <p>Query ID (Hash):</p>
-              <img
-                src={Clipboard}
-                alt="copyToClipboardIcon"
-                className="CopyToClipboardIcon"
-                onClick={() => copyToClipboard(queryId ? queryId : 'n/a')}
-              />
+              <CustomTooltip
+                open={tooltipOpen2}
+                title="Copied!"
+                placement="right"
+                arrow
+              >
+                <img
+                  src={Clipboard}
+                  alt="copyToClipboardIcon"
+                  className="CopyToClipboardIcon"
+                  onClick={() => clipboardConsolidator(queryId, '2')}
+                />
+              </CustomTooltip>
             </div>
             <p className="ResultContent">{queryId ? queryId : ''}</p>
           </div>

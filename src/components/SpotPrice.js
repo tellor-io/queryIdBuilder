@@ -5,6 +5,7 @@ import RadioButtonCreateNew from './reusableComponents/RadioSelectCreateNew'
 import Clipboard from '../assets/copy.svg'
 import { ethers } from 'ethers'
 import copy from 'copy-to-clipboard'
+import { CustomTooltip } from './reusableComponents/CustomTooltip'
 
 export const ButtonContext = React.createContext()
 
@@ -20,6 +21,9 @@ const SpotPrice = () => {
   const [queryData, setQueryData] = useState()
   const [queryId, setQueryId] = useState()
   const [showResults, setShowResults] = useState(false)
+  const [tooltipOpen0, setTooltipOpen0] = useState(false)
+  const [tooltipOpen1, setTooltipOpen1] = useState(false)
+  const [tooltipOpen2, setTooltipOpen2] = useState(false)
   //Globals
   const abiCoder = new ethers.utils.AbiCoder()
   //Helpers
@@ -52,11 +56,41 @@ const SpotPrice = () => {
     setForm(initialFormState)
     setShowResults(true)
   }
+  //Clipboard Functions
+  //Can both be consolidated at
+  //higher level later.
   const copyToClipboard = (text) => {
     if (typeof text === 'object') {
       copy(text.join(''))
     } else {
       copy(text)
+    }
+  }
+  const clipboardConsolidator = (content, num) => {
+    switch (num) {
+      case '0':
+        setTooltipOpen0(true)
+        copyToClipboard(content)
+        setTimeout(() => {
+          setTooltipOpen0(false)
+        }, 2000)
+        break
+      case '1':
+        setTooltipOpen1(true)
+        copyToClipboard(content)
+        setTimeout(() => {
+          setTooltipOpen1(false)
+        }, 2000)
+        break
+      case '2':
+        setTooltipOpen2(true)
+        copyToClipboard(content)
+        setTimeout(() => {
+          setTooltipOpen2(false)
+        }, 2000)
+        break
+      default:
+        return
     }
   }
 
@@ -104,36 +138,57 @@ const SpotPrice = () => {
           <div className="SpotPriceResults">
             <div className="ResultTitle">
               <p>Query Descriptor:</p>
-              <img
-                src={Clipboard}
-                alt="copyToClipboardIcon"
-                className="CopyToClipboardIcon"
-                onClick={() =>
-                  copyToClipboard(jsonString ? JSON.parse(jsonString) : 'n/a')
-                }
-              />
+              <CustomTooltip
+                open={tooltipOpen0}
+                title="Copied!"
+                placement="right"
+                arrow
+              >
+                <img
+                  src={Clipboard}
+                  alt="copyToClipboardIcon"
+                  className="CopyToClipboardIcon"
+                  onClick={() =>
+                    clipboardConsolidator(JSON.parse(jsonString), '0')
+                  }
+                />
+              </CustomTooltip>
             </div>
             <p className="ResultContent">
               {jsonString ? JSON.parse(jsonString) : ''}
             </p>
             <div className="ResultTitle">
               <p>Query Data (Bytes):</p>
-              <img
-                src={Clipboard}
-                alt="copyToClipboardIcon"
-                className="CopyToClipboardIcon"
-                onClick={() => copyToClipboard(queryData ? queryData : 'n/a')}
-              />
+              <CustomTooltip
+                open={tooltipOpen1}
+                title="Copied!"
+                placement="right"
+                arrow
+              >
+                <img
+                  src={Clipboard}
+                  alt="copyToClipboardIcon"
+                  className="CopyToClipboardIcon"
+                  onClick={() => clipboardConsolidator(queryData, '1')}
+                />
+              </CustomTooltip>
             </div>
             <p className="ResultContent">{queryData ? queryData : ''}</p>
             <div className="ResultTitle">
               <p>Query ID (Hash):</p>
-              <img
-                src={Clipboard}
-                alt="copyToClipboardIcon"
-                className="CopyToClipboardIcon"
-                onClick={() => copyToClipboard(queryId ? queryId : 'n/a')}
-              />
+              <CustomTooltip
+                open={tooltipOpen2}
+                title="Copied!"
+                placement="right"
+                arrow
+              >
+                <img
+                  src={Clipboard}
+                  alt="copyToClipboardIcon"
+                  className="CopyToClipboardIcon"
+                  onClick={() => clipboardConsolidator(queryId, '2')}
+                />
+              </CustomTooltip>
             </div>
             <p className="ResultContent">{queryId ? queryId : ''}</p>
           </div>

@@ -51,7 +51,6 @@
   width: 100%;
   height: fit-content;
   border: 2px solid #ffffff;
-  padding: 12px;
-  padding-bottom: 0px;
+  padding: 12px 12px 0px 20px;
   margin-top: 40px;
 }

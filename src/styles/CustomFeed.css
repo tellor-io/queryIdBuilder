@@ -31,7 +31,7 @@
   font-family: 'Inconsolata';
   font-size: 16px;
   font-weight: 300;
-  width: fit-content;
+  width: 170px;
   height: 22px;
   padding-left: 5px;
   padding-top: 2px;
@@ -44,6 +44,10 @@
 .CustomInput:focus {
   outline-color: #20f092;
   outline-width: 1px;
+}
+.CustomInput::placeholder {
+  color: #ffffff;
+  opacity: 0.8;
 }
 .ArgumentContainer {
   display: flex;
@@ -81,6 +85,12 @@
   outline-color: #20f092;
   outline-width: 1px;
 }
+.DynamicFormDropdown:hover {
+  cursor: pointer;
+}
+#BoolDropdown {
+  width: 173px;
+}
 .DynamicFormInput {
   font-family: 'Inconsolata';
   font-size: 16px;
@@ -109,13 +119,19 @@
 .DeleteIconContainer:hover {
   cursor: pointer;
 }
+.ErrorMessage {
+  color: red;
+  margin-bottom: 20px;
+}
+.ErrorMessage > span {
+  font-weight: 700;
+}
 .CustomFeedResults {
   max-width: 75%;
   box-sizing: border-box;
   width: 100%;
   height: fit-content;
   border: 2px solid #ffffff;
-  padding: 12px;
-  padding-bottom: 0px;
-  margin-top: 40px;
+  padding: 12px 12px 0px 20px;
+  margin-top: 30px;
 }
