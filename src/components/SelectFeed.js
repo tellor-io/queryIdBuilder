@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import '../styles/SelectFeed.css'
-import { legacyDataHelper } from '../helpers'
+import { supportedDataHelper } from '../helpers'
 import Clipboard from '../assets/copy.svg'
 import copy from 'copy-to-clipboard'
 import { CustomTooltip } from './reusableComponents/CustomTooltip'
@@ -14,12 +14,16 @@ function SelectFeed() {
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
 
-  //useEffects
+  //useEffects resetting state on app load
   useEffect(() => {
-    const objectToUse = legacyDataHelper('eth/usd')
+    const objectToUse = supportedDataHelper('eth/usd')
     setJsonString(objectToUse[0])
     setQueryData(objectToUse[1])
     setQueryId(objectToUse[2])
+    const target = document.getElementById('eth/usd')
+    const classes = document.querySelectorAll('.RadioButtonInner')
+    classes.forEach((el) => el.classList.remove('display'))
+    target.classList.add('display')
     return () => {
       setJsonString(null)
       setQueryData(null)
@@ -36,14 +40,14 @@ function SelectFeed() {
       container.classList.add('SelectionVisible')
     }, 300)
   }
-  const handleGetIdFromLegacy = (feed) => {
+  const handleGetIdFromSupported = (feed) => {
     handleTransition()
     const target = document.getElementById(feed)
     const classes = document.querySelectorAll('.RadioButtonInner')
     classes.forEach((el) => el.classList.remove('display'))
     target.classList.add('display')
     setTimeout(() => {
-      const objectToUse = legacyDataHelper(feed)
+      const objectToUse = supportedDataHelper(feed)
       setJsonString(objectToUse[0])
       setQueryData(objectToUse[1])
       setQueryId(objectToUse[2])
@@ -92,16 +96,16 @@ function SelectFeed() {
       <div className="RadioSelect">
         <div
           className="Selection"
-          onClick={() => handleGetIdFromLegacy('eth/usd')}
+          onClick={() => handleGetIdFromSupported('eth/usd')}
         >
           <div className="RadioButton">
-            <div id="eth/usd" className="RadioButtonInner display"></div>
+            <div id="eth/usd" className="RadioButtonInner"></div>
           </div>
           <span>ETH/USD</span>
         </div>
         <div
           className="Selection"
-          onClick={() => handleGetIdFromLegacy('btc/usd')}
+          onClick={() => handleGetIdFromSupported('btc/usd')}
         >
           <div className="RadioButton">
             <div id="btc/usd" className="RadioButtonInner"></div>
@@ -110,7 +114,7 @@ function SelectFeed() {
         </div>
         <div
           className="Selection"
-          onClick={() => handleGetIdFromLegacy('ampl/usd')}
+          onClick={() => handleGetIdFromSupported('ampl/usd')}
         >
           <div className="RadioButton">
             <div id="ampl/usd" className="RadioButtonInner"></div>
@@ -119,7 +123,7 @@ function SelectFeed() {
         </div>
         <div
           className="Selection"
-          onClick={() => handleGetIdFromLegacy('uspce')}
+          onClick={() => handleGetIdFromSupported('uspce')}
         >
           <div className="RadioButton">
             <div id="uspce" className="RadioButtonInner"></div>
@@ -128,7 +132,7 @@ function SelectFeed() {
         </div>
         <div
           className="Selection"
-          onClick={() => handleGetIdFromLegacy('trb/usd')}
+          onClick={() => handleGetIdFromSupported('trb/usd')}
         >
           <div className="RadioButton">
             <div id="trb/usd" className="RadioButtonInner"></div>
@@ -137,12 +141,57 @@ function SelectFeed() {
         </div>
         <div
           className="Selection"
-          onClick={() => handleGetIdFromLegacy('eth/jpy')}
+          onClick={() => handleGetIdFromSupported('eth/jpy')}
         >
           <div className="RadioButton">
             <div id="eth/jpy" className="RadioButtonInner"></div>
           </div>
           <span>ETH/JPY</span>
+        </div>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromSupported('ohm/eth')}
+        >
+          <div className="RadioButton">
+            <div id="ohm/eth" className="RadioButtonInner"></div>
+          </div>
+          <span>OHM/ETH</span>
+        </div>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromSupported('vsq/usd')}
+        >
+          <div className="RadioButton">
+            <div id="vsq/usd" className="RadioButtonInner"></div>
+          </div>
+          <span>VSQ/USD</span>
+        </div>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromSupported('awsSpotPrice')}
+        >
+          <div className="RadioButton">
+            <div id="awsSpotPrice" className="RadioButtonInner"></div>
+          </div>
+          <span>AWS SpotPrice</span>
+        </div>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromSupported('bct/usd')}
+        >
+          <div className="RadioButton">
+            <div id="bct/usd" className="RadioButtonInner"></div>
+          </div>
+          <span>BCT/USD</span>
+        </div>
+        <div
+          className="Selection"
+          onClick={() => handleGetIdFromSupported('dai/usd')}
+        >
+          <div className="RadioButton">
+            <div id="dai/usd" className="RadioButtonInner"></div>
+          </div>
+          <span>DAI/USD</span>
         </div>
       </div>
       <div className="SelectFeedResults">
