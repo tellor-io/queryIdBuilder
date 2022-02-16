@@ -43,7 +43,9 @@ function App() {
   return (
     <div className="App">
       <nav className="Nav">
-        <img src={TellorLogo} alt="TellorLogo" />
+        <a href="https://tellor.io/">
+          <img src={TellorLogo} alt="TellorLogo" />
+        </a>
       </nav>
       <div className="BodyContainer">
         <h1 className="BodyHeader">Get a Query ID</h1>
