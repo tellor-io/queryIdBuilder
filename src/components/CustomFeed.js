@@ -103,7 +103,7 @@ function CustomFeed() {
       // setArgs([])
       setShowResults(true)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       setErrMessage(err.message)
       setShowResults(false)
     }

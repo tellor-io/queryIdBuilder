@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../styles/SpotPrice.css'
+import '../styles/LeagueDAO.css'
 import '../styles/Button.css'
 import RadioButtonCreateNew from './reusableComponents/RadioSelectCreateNew'
 import Clipboard from '../assets/copy.svg'
@@ -8,17 +8,17 @@ import copy from 'copy-to-clipboard'
 import { CustomTooltip } from './reusableComponents/CustomTooltip'
 
 const initialFormState = {
-  asset: '',
-  currency: '',
+  optionId: '',
 }
 
-const SpotPrice = () => {
+const LeagueDAO = () => {
   //Component State
   const [form, setForm] = useState(initialFormState)
   const [jsonString, setJsonString] = useState()
   const [queryData, setQueryData] = useState()
   const [queryId, setQueryId] = useState()
   const [showResults, setShowResults] = useState(false)
+  const [errMessage, setErrMessage] = useState(null)
   const [tooltipOpen0, setTooltipOpen0] = useState(false)
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
@@ -29,31 +29,31 @@ const SpotPrice = () => {
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
-  const handleGetSpotPriceId = () => {
-    const jsonStringToUse = JSON.stringify(
-      `{ type: "SpotPrice", asset: "${form.asset
-        .toString()
-        .toLowerCase()}", currency: "${form.currency
-        .toString()
-        .toLowerCase()}" }`
-    )
-    const queryDataArgs = abiCoder.encode(
-      ['string', 'string'],
-      [
-        form.asset.toString().toLowerCase(),
-        form.currency.toString().toLowerCase(),
-      ]
-    )
-    const queryData = abiCoder.encode(
-      ['string', 'bytes'],
-      ['SpotPrice', queryDataArgs]
-    )
-    const queryId = ethers.utils.keccak256(queryData)
-    setJsonString(jsonStringToUse)
-    setQueryData(queryData)
-    setQueryId(queryId)
-    setForm(initialFormState)
-    setShowResults(true)
+  const handleGetLeagueDAOId = () => {
+    setErrMessage(null)
+    try {
+      const jsonStringToUse = JSON.stringify(
+        `{ type: "LeagueDAO", optionId: "${parseInt(form.optionId)}" }`
+      )
+      const queryDataArg = abiCoder.encode(
+        ['uint256'],
+        [parseInt(form.optionId)]
+      )
+      const queryData = abiCoder.encode(
+        ['string', 'bytes'],
+        ['LeagueDAO', queryDataArg]
+      )
+      const queryId = ethers.utils.keccak256(queryData)
+      setJsonString(jsonStringToUse)
+      setQueryData(queryData)
+      setQueryId(queryId)
+      setForm(initialFormState)
+      setShowResults(true)
+    } catch (err) {
+      // console.log(err)
+      setErrMessage(err.message)
+      setShowResults(false)
+    }
   }
   //Clipboard Functions
   //Can both be consolidated at
@@ -92,49 +92,41 @@ const SpotPrice = () => {
         return
     }
   }
-
   return (
-    <div className="CreateNewSpotPriceContainer">
-      <RadioButtonCreateNew props="SpotPrice" />
-      <div className="SpotPriceHeroContainer">
-        <div className="SpotPriceHero">
-          <div className="SpotPriceJSON">
+    <div className="CreateNewLeagueDAOContainer">
+      <RadioButtonCreateNew props="LeagueDAO" />
+      <div className="LeagueDAOHeroContainer">
+        <div className="LeagueDAOHero">
+          <div className="LeagueDAOJSON">
             <p>
-              &#123;<span>"type": </span>"SpotPrice", <span>"asset": </span>
+              &#123;<span>"type": </span>"LeagueDAO", <span>"optionId": </span>
             </p>
             <input
               onChange={handleChange}
-              value={form.asset}
-              name="asset"
-              id="asset"
+              value={form.optionId}
+              name="optionId"
+              id="optionId"
               type="text"
-              className="SpotPriceInput"
-            />
-            <p>
-              , <span>"currency": </span>
-            </p>
-            <input
-              onChange={handleChange}
-              value={form.currency}
-              name="currency"
-              id="currency"
-              type="text"
-              className="SpotPriceInput"
+              className="LeagueDAOInput"
             />
             <p>&#125;</p>
           </div>
+          {errMessage ? (
+            <div className="ErrorMessage">
+              <span>ERROR: </span>
+              {errMessage}
+            </div>
+          ) : null}
           <button
-            disabled={form.asset && form.currency ? false : true}
-            className={
-              form.asset && form.currency ? 'Button' : 'ButtonDisabled'
-            }
-            onClick={handleGetSpotPriceId}
+            disabled={form.optionId ? false : true}
+            className={form.optionId ? 'Button' : 'ButtonDisabled'}
+            onClick={handleGetLeagueDAOId}
           >
             Generate ID
           </button>
         </div>
         {showResults ? (
-          <div className="SpotPriceResults">
+          <div className="LeagueDAOResults">
             <div className="ResultTitle">
               <p>Query Descriptor:</p>
               <CustomTooltip
@@ -197,4 +189,4 @@ const SpotPrice = () => {
   )
 }
 
-export default SpotPrice
+export default LeagueDAO

@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
-import '../styles/SpotPrice.css'
+import '../styles/AWSSpotPrice.css'
 import '../styles/Button.css'
 import RadioButtonCreateNew from './reusableComponents/RadioSelectCreateNew'
-import Clipboard from '../assets/copy.svg'
 import { ethers } from 'ethers'
 import copy from 'copy-to-clipboard'
+import Clipboard from '../assets/copy.svg'
 import { CustomTooltip } from './reusableComponents/CustomTooltip'
 
 const initialFormState = {
-  asset: '',
-  currency: '',
+  zone: '',
+  instance: '',
 }
 
-const SpotPrice = () => {
+const AWSSpotPrice = () => {
   //Component State
   const [form, setForm] = useState(initialFormState)
   const [jsonString, setJsonString] = useState()
   const [queryData, setQueryData] = useState()
   const [queryId, setQueryId] = useState()
   const [showResults, setShowResults] = useState(false)
+  const [errMessage, setErrMessage] = useState(null)
   const [tooltipOpen0, setTooltipOpen0] = useState(false)
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
@@ -29,32 +30,40 @@ const SpotPrice = () => {
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
-  const handleGetSpotPriceId = () => {
-    const jsonStringToUse = JSON.stringify(
-      `{ type: "SpotPrice", asset: "${form.asset
-        .toString()
-        .toLowerCase()}", currency: "${form.currency
-        .toString()
-        .toLowerCase()}" }`
-    )
-    const queryDataArgs = abiCoder.encode(
-      ['string', 'string'],
-      [
-        form.asset.toString().toLowerCase(),
-        form.currency.toString().toLowerCase(),
-      ]
-    )
-    const queryData = abiCoder.encode(
-      ['string', 'bytes'],
-      ['SpotPrice', queryDataArgs]
-    )
-    const queryId = ethers.utils.keccak256(queryData)
-    setJsonString(jsonStringToUse)
-    setQueryData(queryData)
-    setQueryId(queryId)
-    setForm(initialFormState)
-    setShowResults(true)
+  const handleGetAWSSpotPriceId = () => {
+    setErrMessage(null)
+    try {
+      const jsonStringToUse = JSON.stringify(
+        `{ type: "AWSSpotPrice", zone: "${form.zone
+          .toString()
+          .toLowerCase()}", instance: "${form.instance
+          .toString()
+          .toLowerCase()}" }`
+      )
+      const queryDataArgs = abiCoder.encode(
+        ['string', 'string'],
+        [
+          form.zone.toString().toLowerCase(),
+          form.instance.toString().toLowerCase(),
+        ]
+      )
+      const queryData = abiCoder.encode(
+        ['string', 'bytes'],
+        ['AWSSpotPrice', queryDataArgs]
+      )
+      const queryId = ethers.utils.keccak256(queryData)
+      setJsonString(jsonStringToUse)
+      setQueryData(queryData)
+      setQueryId(queryId)
+      setForm(initialFormState)
+      setShowResults(true)
+    } catch (err) {
+      //console.log(err)
+      setErrMessage(err.message)
+      setShowResults(false)
+    }
   }
+
   //Clipboard Functions
   //Can both be consolidated at
   //higher level later.
@@ -94,47 +103,51 @@ const SpotPrice = () => {
   }
 
   return (
-    <div className="CreateNewSpotPriceContainer">
-      <RadioButtonCreateNew props="SpotPrice" />
-      <div className="SpotPriceHeroContainer">
-        <div className="SpotPriceHero">
-          <div className="SpotPriceJSON">
+    <div className="CreateNewAWSSpotPriceContainer">
+      <RadioButtonCreateNew props="AWSSpotPrice" />
+      <div className="AWSSpotPriceHeroContainer">
+        <div className="AWSSpotPriceHero">
+          <div className="AWSSpotPriceJSON">
             <p>
-              &#123;<span>"type": </span>"SpotPrice", <span>"asset": </span>
+              &#123;<span>"type": </span>"AWSSpotPrice", <span>"zone": </span>
             </p>
             <input
               onChange={handleChange}
-              value={form.asset}
-              name="asset"
-              id="asset"
+              value={form.zone}
+              name="zone"
+              id="zone"
               type="text"
-              className="SpotPriceInput"
+              className="AWSSpotPriceInput"
             />
             <p>
-              , <span>"currency": </span>
+              , <span>"instance": </span>
             </p>
             <input
               onChange={handleChange}
-              value={form.currency}
-              name="currency"
-              id="currency"
+              value={form.instance}
+              name="instance"
+              id="instance"
               type="text"
-              className="SpotPriceInput"
+              className="AWSSpotPriceInput"
             />
             <p>&#125;</p>
           </div>
+          {errMessage ? (
+            <div className="ErrorMessage">
+              <span>ERROR: </span>
+              {errMessage}
+            </div>
+          ) : null}
           <button
-            disabled={form.asset && form.currency ? false : true}
-            className={
-              form.asset && form.currency ? 'Button' : 'ButtonDisabled'
-            }
-            onClick={handleGetSpotPriceId}
+            disabled={form.zone && form.instance ? false : true}
+            className={form.zone && form.instance ? 'Button' : 'ButtonDisabled'}
+            onClick={handleGetAWSSpotPriceId}
           >
             Generate ID
           </button>
         </div>
         {showResults ? (
-          <div className="SpotPriceResults">
+          <div className="AWSSpotPriceResults">
             <div className="ResultTitle">
               <p>Query Descriptor:</p>
               <CustomTooltip
@@ -197,4 +210,4 @@ const SpotPrice = () => {
   )
 }
 
-export default SpotPrice
+export default AWSSpotPrice

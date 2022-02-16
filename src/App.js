@@ -5,6 +5,10 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import SelectFeed from './components/SelectFeed'
 import CustomFeed from './components/CustomFeed'
 import SpotPrice from './components/SpotPrice'
+import AWSSpotPrice from './components/AWSSpotPrice'
+import DivaProtocolPolygon from './components/DivaProtocolPolygon'
+import LeagueDAO from './components/LeagueDAO'
+import LegacyRequest from './components/LegacyRequest'
 
 function App() {
   //Component State
@@ -14,7 +18,11 @@ function App() {
   //useEffect for routing
   useEffect(() => {
     if (
+      window.location.href.includes('/awsspotprice') ||
       window.location.href.includes('/custom') ||
+      window.location.href.includes('/divaprotocolpolygon') ||
+      window.location.href.includes('/leaguedao') ||
+      window.location.href.includes('/legacyrequest') ||
       window.location.href.includes('/spotprice')
     ) {
       setActive(false)
@@ -62,7 +70,7 @@ function App() {
               Select Feed
             </Link>
             <Link
-              to="/spotprice"
+              to="/awsspotprice"
               className={inactive ? 'InactiveLink' : 'ActiveLink'}
               onClick={() => activeHelper('CreateFeed')}
             >
@@ -72,8 +80,15 @@ function App() {
           <div className="HeroSection">
             <Routes>
               <Route exact path="/" element={<SelectFeed />} />
-              <Route path="/spotprice" element={<SpotPrice />} />
+              <Route path="/awsspotprice" element={<AWSSpotPrice />} />
               <Route path="/custom" element={<CustomFeed />} />
+              <Route
+                path="/divaprotocolpolygon"
+                element={<DivaProtocolPolygon />}
+              />
+              <Route path="/leaguedao" element={<LeagueDAO />} />
+              <Route path="/legacyrequest" element={<LegacyRequest />} />
+              <Route path="/spotprice" element={<SpotPrice />} />
             </Routes>
           </div>
         </Router>

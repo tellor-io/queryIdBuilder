@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../styles/SpotPrice.css'
+import '../styles/LegacyRequest.css'
 import '../styles/Button.css'
 import RadioButtonCreateNew from './reusableComponents/RadioSelectCreateNew'
 import Clipboard from '../assets/copy.svg'
@@ -8,17 +8,17 @@ import copy from 'copy-to-clipboard'
 import { CustomTooltip } from './reusableComponents/CustomTooltip'
 
 const initialFormState = {
-  asset: '',
-  currency: '',
+  requestId: '',
 }
 
-const SpotPrice = () => {
+const LegacyRequest = () => {
   //Component State
   const [form, setForm] = useState(initialFormState)
   const [jsonString, setJsonString] = useState()
   const [queryData, setQueryData] = useState()
   const [queryId, setQueryId] = useState()
   const [showResults, setShowResults] = useState(false)
+  const [errMessage, setErrMessage] = useState(null)
   const [tooltipOpen0, setTooltipOpen0] = useState(false)
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
@@ -29,31 +29,31 @@ const SpotPrice = () => {
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
-  const handleGetSpotPriceId = () => {
-    const jsonStringToUse = JSON.stringify(
-      `{ type: "SpotPrice", asset: "${form.asset
-        .toString()
-        .toLowerCase()}", currency: "${form.currency
-        .toString()
-        .toLowerCase()}" }`
-    )
-    const queryDataArgs = abiCoder.encode(
-      ['string', 'string'],
-      [
-        form.asset.toString().toLowerCase(),
-        form.currency.toString().toLowerCase(),
-      ]
-    )
-    const queryData = abiCoder.encode(
-      ['string', 'bytes'],
-      ['SpotPrice', queryDataArgs]
-    )
-    const queryId = ethers.utils.keccak256(queryData)
-    setJsonString(jsonStringToUse)
-    setQueryData(queryData)
-    setQueryId(queryId)
-    setForm(initialFormState)
-    setShowResults(true)
+  const handleGetLegacyRequestId = () => {
+    setErrMessage(null)
+    try {
+      const jsonStringToUse = JSON.stringify(
+        `{ type: "LegacyRequest", requestId: "${parseInt(form.requestId)}" }`
+      )
+      const queryDataArg = abiCoder.encode(
+        ['uint256'],
+        [parseInt(form.requestId)]
+      )
+      const queryData = abiCoder.encode(
+        ['string', 'bytes'],
+        ['LegacyRequest', queryDataArg]
+      )
+      const queryId = ethers.utils.keccak256(queryData)
+      setJsonString(jsonStringToUse)
+      setQueryData(queryData)
+      setQueryId(queryId)
+      setForm(initialFormState)
+      setShowResults(true)
+    } catch (err) {
+      // console.log(err)
+      setErrMessage(err.message)
+      setShowResults(false)
+    }
   }
   //Clipboard Functions
   //Can both be consolidated at
@@ -94,47 +94,41 @@ const SpotPrice = () => {
   }
 
   return (
-    <div className="CreateNewSpotPriceContainer">
-      <RadioButtonCreateNew props="SpotPrice" />
-      <div className="SpotPriceHeroContainer">
-        <div className="SpotPriceHero">
-          <div className="SpotPriceJSON">
+    <div className="CreateNewLegacyRequestContainer">
+      <RadioButtonCreateNew props="LegacyRequest" />
+      <div className="LegacyRequestHeroContainer">
+        <div className="LegacyRequestHero">
+          <div className="LegacyRequestJSON">
             <p>
-              &#123;<span>"type": </span>"SpotPrice", <span>"asset": </span>
+              &#123;<span>"type": </span>"LegacyRequest",{' '}
+              <span>"requestId": </span>
             </p>
             <input
               onChange={handleChange}
-              value={form.asset}
-              name="asset"
-              id="asset"
+              value={form.requestId}
+              name="requestId"
+              id="requestId"
               type="text"
-              className="SpotPriceInput"
-            />
-            <p>
-              , <span>"currency": </span>
-            </p>
-            <input
-              onChange={handleChange}
-              value={form.currency}
-              name="currency"
-              id="currency"
-              type="text"
-              className="SpotPriceInput"
+              className="LegacyRequestInput"
             />
             <p>&#125;</p>
           </div>
+          {errMessage ? (
+            <div className="ErrorMessage">
+              <span>ERROR: </span>
+              {errMessage}
+            </div>
+          ) : null}
           <button
-            disabled={form.asset && form.currency ? false : true}
-            className={
-              form.asset && form.currency ? 'Button' : 'ButtonDisabled'
-            }
-            onClick={handleGetSpotPriceId}
+            disabled={form.requestId ? false : true}
+            className={form.requestId ? 'Button' : 'ButtonDisabled'}
+            onClick={handleGetLegacyRequestId}
           >
             Generate ID
           </button>
         </div>
         {showResults ? (
-          <div className="SpotPriceResults">
+          <div className="LegacyRequestResults">
             <div className="ResultTitle">
               <p>Query Descriptor:</p>
               <CustomTooltip
@@ -197,4 +191,4 @@ const SpotPrice = () => {
   )
 }
 
-export default SpotPrice
+export default LegacyRequest
