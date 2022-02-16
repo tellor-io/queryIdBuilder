@@ -50,9 +50,10 @@ function App() {
       <div className="BodyContainer">
         <h1 className="BodyHeader">Get a Query ID</h1>
         <p className="BodyDescription">
-          A Query specifies how to pose a question to the Tellor oracle,
-          instructions for reporters on how to respond (including the format of
-          the response), and any special dispute considerations.{' '}
+          A query specifies how to pose a question to the Tellor oracle.
+          Instructions for reporters on how to respond (including the format of
+          the response), and any special dispute considerations can be found in
+          Tellor's data specs repo.{' '}
           <a
             className="DescriptionLink"
             href="https://github.com/tellor-io/dataSpecs"
