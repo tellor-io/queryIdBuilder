@@ -14,8 +14,6 @@ const RadioSelectCreateNew = ({ props }) => {
     setActive(tab)
   }
 
-  console.log(active)
-
   return (
     <div className="RadioSelectCreateNew">
       <Link
