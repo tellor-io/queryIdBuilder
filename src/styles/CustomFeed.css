@@ -3,7 +3,7 @@
   display: flex;
 }
 .CustomFeedHeroContainer {
-  width: 100%;
+  width: 85%;
 }
 .CustomHero {
   max-width: 80%;
@@ -127,9 +127,8 @@
   font-weight: 700;
 }
 .CustomFeedResults {
-  max-width: 75%;
+  max-width: 90%;
   box-sizing: border-box;
-  width: 100%;
   height: fit-content;
   border: 2px solid #ffffff;
   padding: 12px 12px 0px 20px;

@@ -19,6 +19,7 @@ const AWSSpotPrice = () => {
   const [queryData, setQueryData] = useState()
   const [queryId, setQueryId] = useState()
   const [showResults, setShowResults] = useState(false)
+  const [errMessage, setErrMessage] = useState(null)
   const [tooltipOpen0, setTooltipOpen0] = useState(false)
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
@@ -30,30 +31,37 @@ const AWSSpotPrice = () => {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
   const handleGetAWSSpotPriceId = () => {
-    const jsonStringToUse = JSON.stringify(
-      `{ type: "AWSSpotPrice", zone: "${form.zone
-        .toString()
-        .toLowerCase()}", instance: "${form.instance
-        .toString()
-        .toLowerCase()}" }`
-    )
-    const queryDataArgs = abiCoder.encode(
-      ['string', 'string'],
-      [
-        form.zone.toString().toLowerCase(),
-        form.instance.toString().toLowerCase(),
-      ]
-    )
-    const queryData = abiCoder.encode(
-      ['string', 'bytes'],
-      ['AWSSpotPrice', queryDataArgs]
-    )
-    const queryId = ethers.utils.keccak256(queryData)
-    setJsonString(jsonStringToUse)
-    setQueryData(queryData)
-    setQueryId(queryId)
-    setForm(initialFormState)
-    setShowResults(true)
+    setErrMessage(null)
+    try {
+      const jsonStringToUse = JSON.stringify(
+        `{ type: "AWSSpotPrice", zone: "${form.zone
+          .toString()
+          .toLowerCase()}", instance: "${form.instance
+          .toString()
+          .toLowerCase()}" }`
+      )
+      const queryDataArgs = abiCoder.encode(
+        ['string', 'string'],
+        [
+          form.zone.toString().toLowerCase(),
+          form.instance.toString().toLowerCase(),
+        ]
+      )
+      const queryData = abiCoder.encode(
+        ['string', 'bytes'],
+        ['AWSSpotPrice', queryDataArgs]
+      )
+      const queryId = ethers.utils.keccak256(queryData)
+      setJsonString(jsonStringToUse)
+      setQueryData(queryData)
+      setQueryId(queryId)
+      setForm(initialFormState)
+      setShowResults(true)
+    } catch (err) {
+      //console.log(err)
+      setErrMessage(err.message)
+      setShowResults(false)
+    }
   }
 
   //Clipboard Functions
@@ -99,7 +107,7 @@ const AWSSpotPrice = () => {
       <RadioButtonCreateNew props="AWSSpotPrice" />
       <div className="AWSSpotPriceHeroContainer">
         <div className="AWSSpotPriceHero">
-          <div className="SpotPriceJSON">
+          <div className="AWSSpotPriceJSON">
             <p>
               &#123;<span>"type": </span>"AWSSpotPrice", <span>"zone": </span>
             </p>
@@ -124,6 +132,12 @@ const AWSSpotPrice = () => {
             />
             <p>&#125;</p>
           </div>
+          {errMessage ? (
+            <div className="ErrorMessage">
+              <span>ERROR: </span>
+              {errMessage}
+            </div>
+          ) : null}
           <button
             disabled={form.zone && form.instance ? false : true}
             className={form.zone && form.instance ? 'Button' : 'ButtonDisabled'}
@@ -133,7 +147,7 @@ const AWSSpotPrice = () => {
           </button>
         </div>
         {showResults ? (
-          <div className="SpotPriceResults">
+          <div className="AWSSpotPriceResults">
             <div className="ResultTitle">
               <p>Query Descriptor:</p>
               <CustomTooltip

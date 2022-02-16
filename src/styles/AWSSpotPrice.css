@@ -5,12 +5,11 @@
 .AWSSpotPriceHeroContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 85%;
 }
 .AWSSpotPriceHero {
-  max-width: 100%;
-  box-sizing: border-box;
   width: 100%;
+  box-sizing: border-box;
   height: -moz-fit-content;
   height: fit-content;
   border-left: 2px solid #ffffff;
@@ -45,10 +44,16 @@
   outline-color: #20f092;
   outline-width: 1px;
 }
+.ErrorMessage {
+  color: red;
+  margin-bottom: 20px;
+}
+.ErrorMessage > span {
+  font-weight: 700;
+}
 .AWSSpotPriceResults {
-  max-width: 75%;
+  max-width: 90%;
   box-sizing: border-box;
-  width: 100%;
   height: fit-content;
   border: 2px solid #ffffff;
   padding: 12px 12px 0px 20px;

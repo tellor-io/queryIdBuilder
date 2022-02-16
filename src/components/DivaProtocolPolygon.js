@@ -18,6 +18,7 @@ const DivaProtocolPolygon = () => {
   const [queryData, setQueryData] = useState()
   const [queryId, setQueryId] = useState()
   const [showResults, setShowResults] = useState(false)
+  const [errMessage, setErrMessage] = useState(null)
   const [tooltipOpen0, setTooltipOpen0] = useState(false)
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
@@ -29,20 +30,27 @@ const DivaProtocolPolygon = () => {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
   const handleGetDivaProtocolPolygonId = () => {
-    const jsonStringToUse = JSON.stringify(
-      `{ type: "DivaProtocolPolygon", poolId: "${parseInt(form.poolId)}" }`
-    )
-    const queryDataArg = abiCoder.encode(['uint256'], [parseInt(form.poolId)])
-    const queryData = abiCoder.encode(
-      ['string', 'bytes'],
-      ['divaProtocolPolygon', queryDataArg]
-    )
-    const queryId = ethers.utils.keccak256(queryData)
-    setJsonString(jsonStringToUse)
-    setQueryData(queryData)
-    setQueryId(queryId)
-    setForm(initialFormState)
-    setShowResults(true)
+    setErrMessage(null)
+    try {
+      const jsonStringToUse = JSON.stringify(
+        `{ type: "DivaProtocolPolygon", poolId: "${parseInt(form.poolId)}" }`
+      )
+      const queryDataArg = abiCoder.encode(['uint256'], [parseInt(form.poolId)])
+      const queryData = abiCoder.encode(
+        ['string', 'bytes'],
+        ['divaProtocolPolygon', queryDataArg]
+      )
+      const queryId = ethers.utils.keccak256(queryData)
+      setJsonString(jsonStringToUse)
+      setQueryData(queryData)
+      setQueryId(queryId)
+      setForm(initialFormState)
+      setShowResults(true)
+    } catch (err) {
+      // console.log(err)
+      setErrMessage(err.message)
+      setShowResults(false)
+    }
   }
   //Clipboard Functions
   //Can both be consolidated at
@@ -102,6 +110,12 @@ const DivaProtocolPolygon = () => {
             />
             <p>&#125;</p>
           </div>
+          {errMessage ? (
+            <div className="ErrorMessage">
+              <span>ERROR: </span>
+              {errMessage}
+            </div>
+          ) : null}
           <button
             disabled={form.poolId ? false : true}
             className={form.poolId ? 'Button' : 'ButtonDisabled'}

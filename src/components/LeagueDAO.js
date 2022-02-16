@@ -18,6 +18,7 @@ const LeagueDAO = () => {
   const [queryData, setQueryData] = useState()
   const [queryId, setQueryId] = useState()
   const [showResults, setShowResults] = useState(false)
+  const [errMessage, setErrMessage] = useState(null)
   const [tooltipOpen0, setTooltipOpen0] = useState(false)
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
@@ -29,20 +30,30 @@ const LeagueDAO = () => {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
   const handleGetLeagueDAOId = () => {
-    const jsonStringToUse = JSON.stringify(
-      `{ type: "LeagueDAO", optionId: "${parseInt(form.optionId)}" }`
-    )
-    const queryDataArg = abiCoder.encode(['uint256'], [parseInt(form.optionId)])
-    const queryData = abiCoder.encode(
-      ['string', 'bytes'],
-      ['LeagueDAO', queryDataArg]
-    )
-    const queryId = ethers.utils.keccak256(queryData)
-    setJsonString(jsonStringToUse)
-    setQueryData(queryData)
-    setQueryId(queryId)
-    setForm(initialFormState)
-    setShowResults(true)
+    setErrMessage(null)
+    try {
+      const jsonStringToUse = JSON.stringify(
+        `{ type: "LeagueDAO", optionId: "${parseInt(form.optionId)}" }`
+      )
+      const queryDataArg = abiCoder.encode(
+        ['uint256'],
+        [parseInt(form.optionId)]
+      )
+      const queryData = abiCoder.encode(
+        ['string', 'bytes'],
+        ['LeagueDAO', queryDataArg]
+      )
+      const queryId = ethers.utils.keccak256(queryData)
+      setJsonString(jsonStringToUse)
+      setQueryData(queryData)
+      setQueryId(queryId)
+      setForm(initialFormState)
+      setShowResults(true)
+    } catch (err) {
+      // console.log(err)
+      setErrMessage(err.message)
+      setShowResults(false)
+    }
   }
   //Clipboard Functions
   //Can both be consolidated at
@@ -100,6 +111,12 @@ const LeagueDAO = () => {
             />
             <p>&#125;</p>
           </div>
+          {errMessage ? (
+            <div className="ErrorMessage">
+              <span>ERROR: </span>
+              {errMessage}
+            </div>
+          ) : null}
           <button
             disabled={form.optionId ? false : true}
             className={form.optionId ? 'Button' : 'ButtonDisabled'}

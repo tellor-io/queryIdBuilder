@@ -2,10 +2,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  min-width: 20%;
-  width: 150px;
+  min-width: fit-content;
   height: 150px;
-  margin-right: 50px;
+  margin-right: 22px;
 }
 .SelectionCreateNew {
   display: flex;
