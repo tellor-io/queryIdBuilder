@@ -7,8 +7,6 @@ import { ethers } from 'ethers'
 import copy from 'copy-to-clipboard'
 import { CustomTooltip } from './reusableComponents/CustomTooltip'
 
-export const ButtonContext = React.createContext()
-
 const initialFormState = {
   asset: '',
   currency: '',
