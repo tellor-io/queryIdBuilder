@@ -96,7 +96,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-* This app requires node version **16.14.0** in order to run.
+* This app requires node version **17.2.0** in order to run.
 * We suggest installing nvm globally
   ```sh
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -120,13 +120,13 @@ To get a local copy up and running follow these simple steps.
    ```sh
    npm install
    ```
-3. Change node version to 16.14.0
+3. Change node version to 17.2.0
    ```sh
-   nvm use v16.14.0
+   nvm use v17.2.0
    ```
    Output:
    ```sh
-   Now using node v16.14.0 (npm v8.3.1)
+   Now using node v17.2.0 (npm v8.1.4)
    ```
 4. Spin up your local development server
    ```sh
