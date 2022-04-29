@@ -37,7 +37,7 @@
   <h2 align="center">Tellor Query Id Builder</h2>
 
   <p align="center">
-    This applicationi helps users generate query ids for the Tellor ecosystem. Many reporting types are supported, such as Legacy, SpotPrice, AWSSpotPrice, Diva Protocol, LeagueDAO and Custom. Visit the Usage section for some examples.
+    This application helps users generate query ids for the Tellor ecosystem. Many reporting types are supported, such as Legacy, SpotPrice, AWSSpotPrice, Diva Protocol, LeagueDAO and Custom. Visit the Usage section for some examples.
     <br />
     <br />
     <a href="https://github.com/tellor-io/queryIdBuilder/issues">Report Bug</a>
