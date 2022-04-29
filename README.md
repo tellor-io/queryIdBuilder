@@ -31,7 +31,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/tellor-io/queryIdBuilder">
-    <img src="/public/Tellor_TRB.svg" alt="Logo" width="80" height="80">
+    <img src="/public/TRB.svg" alt="Logo" width="80" height="80">
   </a>
 
   <h2 align="center">Tellor Query Id Builder</h2>
