@@ -137,12 +137,12 @@ To get a local copy up and running follow these simple steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this project to quickly spin up new Tellor frontends! Below are some examples of Tellor apps that use this template: 
+Examples:
 
 <div>
-  <img src="https://user-images.githubusercontent.com/21370350/165304994-7ee7a9cc-0ac3-459b-afc0-b533c8de4240.png" alt="Project example" width="30%" height="100%">
-  <img src="https://user-images.githubusercontent.com/21370350/165304921-9366d525-4443-4b2b-81e5-7e6923d92956.png" alt="Project example" width="30%" height="100%">
-  <img src="https://user-images.githubusercontent.com/21370350/165305095-9c6f2d3d-2d23-4a81-a146-ac10c6b19848.png" alt="Project example" width="30%" height="100%">
+  <img src="https://user-images.githubusercontent.com/21370350/165885987-9f2db185-d116-4221-871a-4138a178a055.png" alt="Project example" width="30%" height="100%">
+  <img src="https://user-images.githubusercontent.com/21370350/165886026-e4f737ac-690f-4289-ba22-a13a41951ba5.png" alt="Project example" width="30%" height="100%">
+  <img src="https://user-images.githubusercontent.com/21370350/165886055-129286f3-7ae7-4b18-ab13-eea6bb859ae2.png" alt="Project example" width="30%" height="100%">
 </div>
 
 <!-- ROADMAP -->
