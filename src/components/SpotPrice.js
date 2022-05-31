@@ -109,6 +109,7 @@ const SpotPrice = () => {
               id="asset"
               type="text"
               className="SpotPriceInput"
+              placeholder="eth"
             />
             <p>
               , <span>"currency": </span>
@@ -120,6 +121,7 @@ const SpotPrice = () => {
               id="currency"
               type="text"
               className="SpotPriceInput"
+              placeholder="usd"
             />
             <p>&#125;</p>
           </div>
