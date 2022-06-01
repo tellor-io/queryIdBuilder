@@ -31,7 +31,7 @@ const RadioSelectCreateNew = ({ props }) => {
             }
           ></div>
         </div>
-        <span>SpotPrice</span>
+        <span>SpotPrice (use lower-case ticker symbols)</span>
       </Link>
       <Link
         to="/custom"
