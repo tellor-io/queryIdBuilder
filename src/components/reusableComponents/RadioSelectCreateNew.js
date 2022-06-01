@@ -17,21 +17,21 @@ const RadioSelectCreateNew = ({ props }) => {
   return (
     <div className="RadioSelectCreateNew">
       <Link
-        to="/awsspotprice"
+        to="/spotprice"
         className="SelectionCreateNew"
-        onClick={() => handleSwitching('AWSSpotPrice')}
+        onClick={() => handleSwitching('SpotPrice')}
       >
         <div className="RadioButtonCreateNew">
           <div
-            id="AWSSpotPrice"
+            id="SpotPrice"
             className={
-              active === 'AWSSpotPrice'
+              active === 'SpotPrice'
                 ? 'RadioButtonCreateNewInner createNewDisplay'
                 : 'RadioButtonCreateNewInner'
             }
           ></div>
         </div>
-        <span>AWSSpotPrice</span>
+        <span>SpotPrice</span>
       </Link>
       <Link
         to="/custom"
@@ -50,74 +50,11 @@ const RadioSelectCreateNew = ({ props }) => {
         </div>
         <span>Custom</span>
       </Link>
-      <Link
-        to="/divaprotocolpolygon"
-        className="SelectionCreateNew"
-        onClick={() => handleSwitching('DivaProtocolPolygon')}
-      >
-        <div className="RadioButtonCreateNew">
-          <div
-            id="DivaProtocolPolygon"
-            className={
-              active === 'DivaProtocolPolygon'
-                ? 'RadioButtonCreateNewInner createNewDisplay'
-                : 'RadioButtonCreateNewInner'
-            }
-          ></div>
-        </div>
-        <span>DivaProtocolPolygon</span>
-      </Link>
-      <Link
-        to="/leaguedao"
-        className="SelectionCreateNew"
-        onClick={() => handleSwitching('LeagueDAO')}
-      >
-        <div className="RadioButtonCreateNew">
-          <div
-            id="LeagueDAO"
-            className={
-              active === 'LeagueDAO'
-                ? 'RadioButtonCreateNewInner createNewDisplay'
-                : 'RadioButtonCreateNewInner'
-            }
-          ></div>
-        </div>
-        <span>LeagueDAO</span>
-      </Link>
-      <Link
-        to="/legacyrequest"
-        className="SelectionCreateNew"
-        onClick={() => handleSwitching('LegacyRequest')}
-      >
-        <div className="RadioButtonCreateNew">
-          <div
-            id="LegacyRequest"
-            className={
-              active === 'LegacyRequest'
-                ? 'RadioButtonCreateNewInner createNewDisplay'
-                : 'RadioButtonCreateNewInner'
-            }
-          ></div>
-        </div>
-        <span>LegacyRequest</span>
-      </Link>
-      <Link
-        to="/spotprice"
-        className="SelectionCreateNew"
-        onClick={() => handleSwitching('SpotPrice')}
-      >
-        <div className="RadioButtonCreateNew">
-          <div
-            id="SpotPrice"
-            className={
-              active === 'SpotPrice'
-                ? 'RadioButtonCreateNewInner createNewDisplay'
-                : 'RadioButtonCreateNewInner'
-            }
-          ></div>
-        </div>
-        <span>SpotPrice</span>
-      </Link>
+      
+      
+      
+      
+      
     </div>
   )
 }
