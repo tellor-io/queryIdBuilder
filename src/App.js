@@ -50,8 +50,8 @@ function App() {
       <div className="BodyContainer">
         <h1 className="BodyHeader">Get a Query ID</h1>
         <p className="BodyDescription">
-        A query ID is the unique identifier of a query 'type' for data that's requested, 
-          reported, and retrieved by Tellor oracles. Use the tools below to generate a query ID for your data. For 
+        A 'query id' is the unique identifier of a 'query type' for data that's requested, 
+          reported, and retrieved by Tellor oracles. Use the tools below to generate a query id for your data. For 
           a more detailed explanation of queries, see {' '}
           <a
             className="DescriptionLink"
@@ -63,7 +63,7 @@ function App() {
           </a>
             .
         </p>
-        <p className="BodyDescription"> *For 'SpotPrice', use lower case ticker symbols
+        <p className="BodyDescription"> 
         </p>
         <Router>
           <div className="HeroNavLinks">
@@ -73,12 +73,11 @@ function App() {
               className={inactive ? 'InactiveLink' : 'ActiveLink'}
               onClick={() => activeHelper('CreateFeed')}
             >
-              Create New
+              Create New (click to get started)
             </Link>
           </div>
           <div className="HeroSection">
             <Routes>
-              <Route exact path="/" element={<SelectFeed />} />
               <Route path="/awsspotprice" element={<AWSSpotPrice />} />
               <Route path="/custom" element={<CustomFeed />} />
               <Route
