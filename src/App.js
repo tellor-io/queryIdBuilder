@@ -63,8 +63,7 @@ function App() {
           </a>
             .
         </p>
-        <p className="BodyDescription"> 
-        </p>
+        
         <Router>
           <div className="HeroNavLinks">
             
