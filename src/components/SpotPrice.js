@@ -22,12 +22,28 @@ const SpotPrice = () => {
   const [tooltipOpen0, setTooltipOpen0] = useState(false)
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
+  const [currentAsset, setCurrentAsset] = useState('')
   //Globals
   const abiCoder = new ethers.utils.AbiCoder()
 
   //Helpers
+  const handleCurrentAsset = (currentAsset) => {  
+    if (currentAsset === 'btc') {
+     return  <span style={{fontWeight: 'bold', color: 'yellow'}} > ***If you're on mainnet, there is a BTC/USD legacy feed with query id 0x0000000000000000000000000000000000000000000000000000000000000001 It is the same as a spot price USD feed, but has 6 decimals***</span>
+    }
+    else if (currentAsset === 'eth') {
+      return  <span style={{fontWeight: 'bold', color: 'yellow'}} > ***If you're on mainnet, there is an ETH/USD legacy feed with query id 0x0000000000000000000000000000000000000000000000000000000000000002 It is the same as a spot price USD feed, but has 6 decimals***</span>
+    }
+    else if (currentAsset === 'ampl') {
+      return  <span style={{fontWeight: 'bold', color: 'yellow'}} > ***If you're on mainnet, there is an AMPL/USD legacy feed with query id 0x0000000000000000000000000000000000000000000000000000000000000010 It is the same as a spot price USD feed, but has 18 decimals***</span>
+    }
+    else {
+      return null
+    }
+  }
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
+    console.log(event.target.value)
   }
   const handleGetSpotPriceId = () => {
     const jsonStringToUse = JSON.stringify(
@@ -54,7 +70,11 @@ const SpotPrice = () => {
     setQueryId(queryId)
     setForm(initialFormState)
     setShowResults(true)
+    setCurrentAsset(form.asset)
   }
+
+  const [state, setState] = useState( {shown: false } );
+
   //Clipboard Functions
   //Can both be consolidated at
   //higher level later.
@@ -94,6 +114,7 @@ const SpotPrice = () => {
   }
 
   return (
+    
     <div className="CreateNewSpotPriceContainer">
       <RadioButtonCreateNew props="SpotPrice" />
       <div className="SpotPriceHeroContainer">
@@ -192,7 +213,10 @@ const SpotPrice = () => {
               </CustomTooltip>
             </div>
             <p className="ResultContent">{queryId ? queryId : ''}</p>
-          </div>
+            {handleCurrentAsset(currentAsset)}
+          <div>      
+      </div>
+            </div>
         ) : null}
       </div>
     </div>
@@ -200,3 +224,4 @@ const SpotPrice = () => {
 }
 
 export default SpotPrice
+//JSON.parse(jsonString)

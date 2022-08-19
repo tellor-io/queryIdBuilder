@@ -63,17 +63,7 @@ function App() {
           </a>
             .
         </p>
-        <p>  <span style={{fontWeight: 'bold'}}>***If you want to use ETH/USD or AMPL/USD on mainnet, use their respective {' '}
-          <a
-            className="DescriptionLink"
-            href="https://github.com/tellor-io/dataSpecs/blob/573af71b43c94ee73d30f072abe6ae430559eec9/types/LegacyRequest.md"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-           Legacy ID's
-          </a>.***</span></p>
-        <p className="BodyDescription"> 
-        </p>
+        
         <Router>
           <div className="HeroNavLinks">
             
