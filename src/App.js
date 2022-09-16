@@ -9,6 +9,7 @@ import AWSSpotPrice from './components/AWSSpotPrice'
 import DivaProtocolPolygon from './components/DivaProtocolPolygon'
 import LeagueDAO from './components/LeagueDAO'
 import LegacyRequest from './components/LegacyRequest'
+import DataDecoder from './components/DataDecoder'
 
 function App() {
   //Component State
@@ -89,6 +90,9 @@ function App() {
             </Routes>
           </div>
         </Router>
+        <div className='HeroSection'>
+          <DataDecoder/>
+        </div>
       </div>
     </div>
   )
