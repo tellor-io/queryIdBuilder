@@ -1,31 +1,14 @@
 import {useState} from 'react';
 
 
-const BASE_DECODE_API_URL = "https://querydataapi.herokuapp.com/decode/"
+// const BASE_DECODE_API_URL = "https://querydataapi.herokuapp.com/decode/"
+const BASE_DECODE_API_URL = "http://localhost:8000/decode/"
 
-const fetchDecodedQueryDataJSON = async (queryDataHexStr) => {
-    const url = `${BASE_DECODE_API_URL}query_data/?query_data_str=${queryDataHexStr}`
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'accept': 'application/json',
-            'content-type': 'application/x-www-form-urlencoded'
-        }
-    });
-    const json = await response.json();
-    return JSON.stringify(json, null, 2);
-}
-
-const fetchDecodedSubmitValueBytesJSON = async (submitValueBytesHexStr) => {
-    const url = `${BASE_DECODE_API_URL}decodeSubmitValue/${submitValueBytesHexStr}`;
-    const response = await fetch(url);
-    const json = await response.json();
-    return JSON.stringify(json, null, 2);
-}
 
 const DataDecoder = () => {
     const [queryDataHexStr, setQueryDataHexStr] = useState("");
     const [submitValueBytesHexStr, setSubmitValueBytesHexStr] = useState("");
+    const [solTypeStr, setSolTypeStr] = useState("");
     const [decodedQueryDataJSON, setDecodedQueryDataJSON] = useState("");
     const [decodedSubmitValueBytesJSON, setDecodedSubmitValueBytesJSON] = useState("");
 
@@ -37,22 +20,62 @@ const DataDecoder = () => {
         setSubmitValueBytesHexStr(event.target.value);
     }
 
+    const handleSolTypeStrChange = (event) => {
+        setSolTypeStr(event.target.value);
+    }
+
+    const fetchDecodedQueryDataJSON = async (queryDataHexStr) => {
+        const url = `${BASE_DECODE_API_URL}query_data/?query_data_str=${queryDataHexStr}`
+        console.log(url);
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'accept': 'application/json',
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+            const json = await response.json();
+            setDecodedQueryDataJSON(JSON.stringify(json, null, 2));
+        } catch (error) {
+            console.error(error);
+        } finally {
+            console.log("decoding query data done!");
+        }
+    }
+
+    const fetchDecodedSubmitValueBytesJSON = async (submitValueBytesHexStr, solTypeStr) => {
+        const url = `${BASE_DECODE_API_URL}submit_value_bytes/?submit_value_bytes_str=${submitValueBytesHexStr}?abi_type=${solTypeStr}`;
+        console.log(url);
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'accept': 'application/json',
+                },
+            });
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+            const json = await response.json();
+            setDecodedSubmitValueBytesJSON(JSON.stringify(json, null, 2));
+        } catch (error) {
+            console.error(error);
+        } finally {
+            console.log("decode submit val bytes func called!");
+        }
+    }
+
     const decodeQueryData = (event) => {
         event.preventDefault();
-        console.log("queryDataHexStr: ", queryDataHexStr);
-        let json = fetchDecodedQueryDataJSON(queryDataHexStr).then((json) => {
-            console.log("decodedQueryDataJSON: ", json);
-        });
-        setDecodedQueryDataJSON(json);
+        fetchDecodedQueryDataJSON(queryDataHexStr);
     }
     
     const decodeSubmitValueBytes = (event) => {
         event.preventDefault();
-        console.log("submitValueBytesHexStr: ", submitValueBytesHexStr);
-        let json = fetchDecodedSubmitValueBytesJSON(submitValueBytesHexStr).then((json) => {
-            console.log("decodedSubmitValueBytesJSON: ", json);
-        });
-        setDecodedSubmitValueBytesJSON(json);
+        fetchDecodedSubmitValueBytesJSON(submitValueBytesHexStr, solTypeStr);
     }
 
     return (
@@ -75,6 +98,12 @@ const DataDecoder = () => {
                 placeholder="0x..."
                 id="SubmitValueBytesHexStr" 
                 onChange={handleSubmitValueBytesHexStrChange}
+            />
+            <input
+                type="text"
+                placeholder="uint256"
+                id="SolTypeStr"
+                onChange={handleSolTypeStrChange}
             />
             <button onClick={decodeSubmitValueBytes}>Decode</button>
             <br></br>
