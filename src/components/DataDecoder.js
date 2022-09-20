@@ -1,8 +1,8 @@
 import {useState} from 'react';
 
 
-// const BASE_DECODE_API_URL = "https://querydataapi.herokuapp.com/decode/"
-const BASE_DECODE_API_URL = "http://localhost:8000/decode/"
+const BASE_DECODE_API_URL = "https://querydataapi.herokuapp.com/decode/"
+// const BASE_DECODE_API_URL = "http://localhost:8000/decode/"
 
 
 const DataDecoder = () => {
@@ -29,7 +29,7 @@ const DataDecoder = () => {
         console.log(url);
         try {
             const response = await fetch(url, {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'accept': 'application/json',
                 }
@@ -47,14 +47,19 @@ const DataDecoder = () => {
     }
 
     const fetchDecodedSubmitValueBytesJSON = async (submitValueBytesHexStr, solTypeStr) => {
-        const url = `${BASE_DECODE_API_URL}submit_value_bytes/?submit_value_bytes_str=${submitValueBytesHexStr}?abi_type=${solTypeStr}`;
+        const url = `${BASE_DECODE_API_URL}submit_value_bytes/`;
         console.log(url);
         try {
             const response = await fetch(url, {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'accept': 'application/json',
+                    "Content-type": "application/json"
                 },
+                body: JSON.stringify({
+                    byte_str: submitValueBytesHexStr,
+                    sol_type: solTypeStr,
+                })
             });
             if (!response.ok) {
                 throw new Error(`Error! status: ${response.status}`);
