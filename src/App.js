@@ -22,6 +22,7 @@ function App() {
       window.location.href.includes('/awsspotprice') ||
       window.location.href.includes('/custom') ||
       window.location.href.includes('/divaprotocolpolygon') ||
+      window.location.href.includes('/datadecoder') ||
       window.location.href.includes('/leaguedao') ||
       window.location.href.includes('/legacyrequest') ||
       window.location.href.includes('/spotprice')
@@ -73,7 +74,7 @@ function App() {
               className={inactive ? 'InactiveLink' : 'ActiveLink'}
               onClick={() => activeHelper('CreateFeed')}
             >
-              Create New (click to get started)
+              Click to get started
             </Link>
           </div>
           <div className="HeroSection">
@@ -87,12 +88,11 @@ function App() {
               <Route path="/leaguedao" element={<LeagueDAO />} />
               <Route path="/legacyrequest" element={<LegacyRequest />} />
               <Route path="/spotprice" element={<SpotPrice />} />
+              <Route path="/datadecoder" element={<DataDecoder />} />
             </Routes>
           </div>
         </Router>
-        <div className='HeroSection'>
-          <DataDecoder/>
-        </div>
+    
       </div>
     </div>
   )

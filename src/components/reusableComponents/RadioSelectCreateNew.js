@@ -50,11 +50,23 @@ const RadioSelectCreateNew = ({ props }) => {
         </div>
         <span>Custom</span>
       </Link>
-      
-      
-      
-      
-      
+      <Link
+        to="/datadecoder"
+        className="SelectionCreateNew"
+        onClick={() => handleSwitching('DataDecoder')}
+      >
+        <div className="RadioButtonCreateNew">
+          <div
+            id="DataDecoder"
+            className={
+              active === 'DataDecoder'
+                ? 'RadioButtonCreateNewInner createNewDisplay'
+                : 'RadioButtonCreateNewInner'
+            }
+          ></div>
+        </div>
+        <span>Decoder</span>
+      </Link>
     </div>
   )
 }
