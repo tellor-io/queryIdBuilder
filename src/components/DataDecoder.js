@@ -1,4 +1,7 @@
 import {useState} from 'react';
+import RadioButtonCreateNew from './reusableComponents/RadioSelectCreateNew'
+import '../styles/Button.css'
+import '../styles/DataDecoder.css'
 
 
 const BASE_DECODE_API_URL = "https://querydataapi.herokuapp.com/decode/"
@@ -85,7 +88,12 @@ const DataDecoder = () => {
 
     return (
         <div className="HeroSection">
-            <h2>Decode query data bytes</h2>
+        <div className="DataDecoderContainer">
+            <RadioButtonCreateNew props="DataDecoder" />
+            <div className="DataDecoderHero">
+            <div className="DataDecoderHeroContainer">
+            </div>
+            <h4>Decode query data bytes</h4>
             <input 
                 type="text"
                 placeholder="0x..."
@@ -97,12 +105,14 @@ const DataDecoder = () => {
             <pre>
                 {decodedQueryDataJSON}
             </pre>
-            <h2>Decode submitted value bytes</h2>
+            <br></br>
+            <h4>Decode submitted value bytes</h4>
             <input 
                 type="text"
                 placeholder="0x..."
                 id="SubmitValueBytesHexStr" 
                 onChange={handleSubmitValueBytesHexStrChange}
+                
             />
             <input
                 type="text"
@@ -116,6 +126,8 @@ const DataDecoder = () => {
                 {decodedSubmitValueBytesJSON}
             </pre>
         </div>
+        </div>
+    </div>
     )
 }
 
