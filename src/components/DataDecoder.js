@@ -100,27 +100,37 @@ const DataDecoder = () => {
                 id="queryDataHexStr" 
                 onChange={handleQueryDataHexStrChange}
             />
+            <br></br>
             <button onClick={decodeQueryData}>Decode</button>
             <br></br>
             <pre>
                 {decodedQueryDataJSON}
             </pre>
             <br></br>
-            <h4>Decode submitted value bytes</h4>
+            <br></br>
+            <h4>Decode submitted value </h4>
+            <h5></h5>
+
             <input 
                 type="text"
                 placeholder="0x..."
                 id="SubmitValueBytesHexStr" 
                 onChange={handleSubmitValueBytesHexStrChange}
-                
             />
+            <br></br>
+            <h5></h5>
+
             <input
                 type="text"
-                placeholder="uint256"
+                placeholder="type  (string, uint256, address etc.)"
                 id="SolTypeStr"
                 onChange={handleSolTypeStrChange}
+                size="30"
             />
-            <button onClick={decodeSubmitValueBytes}>Decode</button>
+            <br></br>
+            <button 
+            onClick={decodeSubmitValueBytes}>Decode
+            </button>
             <br></br>
             <pre>
                 {decodedSubmitValueBytesJSON}
