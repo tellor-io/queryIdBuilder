@@ -50,10 +50,10 @@ function App() {
         </a>
       </nav>
       <div className="BodyContainer">
-        <h1 className="BodyHeader">Get a Query ID</h1>
+        <h1 className="BodyHeader">Query ID Station</h1>
         <p className="BodyDescription">
         A 'query id' is the unique identifier of a 'query type' for data that's requested, 
-          reported, and retrieved by Tellor oracles. Use the tools below to generate a query id for your data. For 
+          reported, and retrieved by Tellor oracles. Use the tools below to generate a query id for your data, or decode an already submitted value. <br></br><br></br>For 
           a more detailed explanation of queries, see {' '}
           <a
             className="DescriptionLink"
@@ -74,7 +74,7 @@ function App() {
               className={inactive ? 'InactiveLink' : 'ActiveLink'}
               onClick={() => activeHelper('CreateFeed')}
             >
-              Click to get started
+              -->  Click Here to Get Started
             </Link>
           </div>
           <div className="HeroSection">
