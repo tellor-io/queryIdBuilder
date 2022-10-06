@@ -61,7 +61,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            this repository
+            this 'data specs' repository
           </a>
             .
         </p>
@@ -74,7 +74,7 @@ function App() {
               className={inactive ? 'InactiveLink' : 'ActiveLink'}
               onClick={() => activeHelper('CreateFeed')}
             >
-              -->  Click Here to Get Started
+              --{'>'}  Click Here to Get Started
             </Link>
           </div>
           <div className="HeroSection">
