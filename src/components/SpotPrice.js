@@ -27,20 +27,6 @@ const SpotPrice = () => {
   const abiCoder = new ethers.utils.AbiCoder()
 
   //Helpers
-  const handleCurrentAsset = (currentAsset) => {  
-    if (currentAsset === 'btc') {
-     return  <span style={{fontWeight: 'bold', color: 'tomato'}} > ***If you're on Ethereum Mainnet, there is a BTC/USD legacy feed with query id: <span style={{fontWeight: 'bold', color: ' #20f092'}} >0x0000000000000000000000000000000000000000000000000000000000000002</span> <br></br> (Same as a 'SpotPrice' USD feed, but has 6 decimals)</span>
-    }
-    else if (currentAsset === 'eth') {
-      return  <span style={{fontWeight: 'bold', color: 'tomato'}} > ***If you're on Ethereum Mainnet, there is an ETH/USD legacy feed with query id: <span style={{fontWeight: 'bold', color: ' #20f092'}} > 0x0000000000000000000000000000000000000000000000000000000000000001.</span> <br></br> (Same as a 'SpotPrice' USD feed, but has 6 decimals)</span>
-    }
-    else if (currentAsset === 'ampl') {
-      return  <span style={{fontWeight: 'bold', color: 'tomato'}} > ***If you're on Ethereum Mainnet, there is an AMPL/USD legacy feed with query id: <span style={{fontWeight: 'bold', color: ' #20f092'}} > 0x0000000000000000000000000000000000000000000000000000000000000010 </span> <br></br>(Same as a 'SpotPrice' USD feed, but has 18 decimals)</span>
-    }
-    else {
-      return null
-    }
-  }
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
     console.log(event.target.value)
@@ -155,9 +141,6 @@ const SpotPrice = () => {
         </div>
         {showResults ? (
           <div className="SpotPriceResults">
-              <div className="ResultTitle">
-                <p>{handleCurrentAsset(currentAsset)}</p>   
-              </div>
             <div className="ResultTitle">
               <p>Query Descriptor:</p>
               <CustomTooltip
