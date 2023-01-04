@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/CustomFeed.css'
 import '../styles/Button.css'
 import Clipboard from '../assets/copy.svg'
+import  Info from '../assets/info_copy.svg'
 import Delete from '../assets/exit.svg'
 import RadioSelectCreateNew from './reusableComponents/RadioSelectCreateNew'
 import { ethers } from 'ethers'
@@ -26,6 +27,7 @@ function CustomFeed() {
   const [tooltipOpen0, setTooltipOpen0] = useState(false)
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
+  const [tooltipOpen3, setTooltipOpen3] = useState(false)
   //Globals
   const abiCoder = new ethers.utils.AbiCoder()
   //For Button Disabling
@@ -134,6 +136,13 @@ function CustomFeed() {
           setTooltipOpen2(false)
         }, 2000)
         break
+      case '3':
+        setTooltipOpen3(true)
+        copy(null)
+        setTimeout(() => {
+          setTooltipOpen3(false)
+        }, 2000)
+        break
       default:
         return
     }
@@ -155,9 +164,21 @@ function CustomFeed() {
                 id="type"
                 type="text"
                 className="CustomInput"
-                placeholder="CamelCaseYourTypeName"
+                placeholder="camelCaseYourTypeName"
               />
-              <p>,</p>
+              <p>,</p><CustomTooltip
+            open={tooltipOpen3}
+            title="The type name is arbitrary. Check the data specs repo for more info! (link above)"
+            placement="right"
+            arrow
+          >
+            <img
+              src={Info}
+              alt="copyToClipboardIcon"
+              className="CopyToClipboardIcon"
+              onClick={() => (clipboardConsolidator(queryData, '3'))}
+            />
+            </CustomTooltip>
             </div>
             {args &&
               args.map((arg, index) => {

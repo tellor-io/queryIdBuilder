@@ -61,7 +61,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            this 'data specs' repository
+            this 'data specs' repo
           </a>
             .
         </p>
