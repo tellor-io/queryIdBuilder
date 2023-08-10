@@ -5,7 +5,7 @@
 .SpotPriceHeroContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 72%;
 }
 .SpotPriceHero {
   max-width: 100%;

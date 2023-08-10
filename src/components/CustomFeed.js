@@ -49,12 +49,10 @@ function CustomFeed() {
     setFormValues({ ...formValues, [event.target.name]: event.target.value })
   }
   const handleDynamicChange = (index, event) => {
-    let newDynamicFormValues
+    let newDynamicFormValues = [...dynamicFormValues]
     if (event.target.name === 'dataType') {
-      newDynamicFormValues = [...dynamicFormValues]
-      newDynamicFormValues[index]['argValue'] = ''
+      newDynamicFormValues[index]['argValue'] = event.target.value === 'string' ? '' : null
     }
-    newDynamicFormValues = [...dynamicFormValues]
     newDynamicFormValues[index][event.target.name] = event.target.value
     setDynamicFormValues(newDynamicFormValues)
     setArgs(newDynamicFormValues)
@@ -164,7 +162,7 @@ function CustomFeed() {
                 id="type"
                 type="text"
                 className="CustomInput"
-                placeholder="camelCaseYourTypeName"
+                placeholder="CamelCaseYourTypeName"
               />
               <p>,</p><CustomTooltip
             open={tooltipOpen3}
@@ -259,12 +257,12 @@ function CustomFeed() {
           </button>
           {dynamicFormValues.length > 0 ? (
             <button
-              disabled={!formFilledOut}
-              className={formFilledOut ? 'Button' : 'ButtonDisabled'}
-              onClick={() => handleGetCustomFeed(formValues, dynamicFormValues)}
-            >
-              Generate ID
-            </button>
+            disabled={formValues.type === ''}
+            className={formValues.type !== '' ? 'Button' : 'ButtonDisabled'}
+            onClick={() => handleGetCustomFeed(formValues, dynamicFormValues)}
+          >
+            Generate ID
+          </button>
           ) : null}
         </div>
         {showResults ? (
