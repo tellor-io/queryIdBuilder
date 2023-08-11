@@ -12,9 +12,7 @@ import LegacyRequest from './components/LegacyRequest'
 import DataDecoder from './components/DataDecoder'
 
 function App() {
-  //Component State
-  const [active, setActive] = useState(true)
-  const [inactive, setInactive] = useState(true)
+
 
   //useEffect for routing
   useEffect(() => {
@@ -27,20 +25,11 @@ function App() {
       window.location.href.includes('/legacyrequest') ||
       window.location.href.includes('/spotprice')
     ) {
-      setActive(false)
-      setInactive(false)
+     
     }
   }, [])
 
-  const activeHelper = (tab) => {
-    if (tab === 'SelectFeed') {
-      setActive(true)
-      setInactive(true)
-    } else if (tab === 'CreateFeed') {
-      setActive(false)
-      setInactive(false)
-    }
-  }
+
 
   return (
     <div className="App">
@@ -69,16 +58,12 @@ function App() {
         <Router>
           <div className="HeroNavLinks">
             
-            <Link
-              to="/spotprice"
-              className={inactive ? 'InactiveLink' : 'ActiveLink'}
-              onClick={() => activeHelper('CreateFeed')}
-            >
-              --{'>'}  Click Here to Get Started
-            </Link>
+            
           </div>
           <div className="HeroSection">
             <Routes>
+            <Route path="/" element={<SpotPrice />} /> {/* Set the SpotPrice component as the default route */}
+  <Route path="/spotprice" element={<SpotPrice />} />
               <Route path="/awsspotprice" element={<AWSSpotPrice />} />
               <Route path="/custom" element={<CustomFeed />} />
               <Route
@@ -87,7 +72,6 @@ function App() {
               />
               <Route path="/leaguedao" element={<LeagueDAO />} />
               <Route path="/legacyrequest" element={<LegacyRequest />} />
-              <Route path="/spotprice" element={<SpotPrice />} />
               <Route path="/datadecoder" element={<DataDecoder />} />
             </Routes>
           </div>

@@ -3,7 +3,9 @@
   display: flex;
 }
 .CustomFeedHeroContainer {
-  width: 85%;
+  width: 72%;
+  overflow-wrap: break-word;
+
 }
 .CustomHero {
   max-width: 80%;
@@ -133,4 +135,6 @@
   border: 2px solid #ffffff;
   padding: 12px 12px 0px 20px;
   margin-top: 30px;
+  overflow-wrap: break-word;
+
 }
