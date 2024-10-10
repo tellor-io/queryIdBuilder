@@ -28,6 +28,8 @@ function CustomFeed() {
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
   const [tooltipOpen3, setTooltipOpen3] = useState(false)
+  const [shouldGenerateId, setShouldGenerateId] = useState(false)
+  const [initialIdGenerated, setInitialIdGenerated] = useState(false)
   //Globals
   const abiCoder = new ethers.utils.AbiCoder()
   //For Button Disabling
@@ -51,14 +53,20 @@ function CustomFeed() {
   const handleDynamicChange = (index, event) => {
     let newDynamicFormValues = [...dynamicFormValues]
     if (event.target.name === 'dataType') {
-      newDynamicFormValues[index]['argValue'] = event.target.value === 'string' ? '' : null
+      newDynamicFormValues[index]['argValue'] = event.target.value === 'string' ? '' : 
+        event.target.value === 'bool' ? 'true' : null
+      newDynamicFormValues[index][event.target.name] = event.target.value
+    } else if (event.target.name === 'argValue' && newDynamicFormValues[index]['dataType'] === 'bool') {
+      newDynamicFormValues[index][event.target.name] = event.target.value
+    } else {
+      newDynamicFormValues[index][event.target.name] = event.target.value
     }
-    newDynamicFormValues[index][event.target.name] = event.target.value
     setDynamicFormValues(newDynamicFormValues)
     setArgs(newDynamicFormValues)
   }
   const handleAddFields = () => {
     setDynamicFormValues([...dynamicFormValues, { dataType: '', argValue: '' }])
+    setInitialIdGenerated(false)
   }
   const handleRemoveFields = (index) => {
     let newDynamicFormValues = [...dynamicFormValues]
@@ -69,6 +77,12 @@ function CustomFeed() {
   const handleGetCustomFeed = (type, form) => {
     setErrMessage(null)
     try {
+      // Check if all required fields are filled
+      const allFieldsFilled = form.every(arg => arg.dataType && arg.argValue !== '')
+      if (!allFieldsFilled) {
+        throw new Error("Please fill in all fields before generating ID")
+      }
+
       //Getting JSON object
       let object = form.reduce((acc, curr, index) => {
         let indexer = `arg${index + 1}`.toString()
@@ -82,7 +96,11 @@ function CustomFeed() {
       let values = []
       form.forEach((arg) => {
         types.push(arg.dataType)
-        values.push(arg.argValue)
+        if (arg.dataType === 'bool') {
+          values.push(arg.argValue === 'true')
+        } else {
+          values.push(arg.argValue)
+        }
       })
       const queryDataArgs = abiCoder.encode(types, values)
       //Getting queryData
@@ -146,6 +164,19 @@ function CustomFeed() {
     }
   }
 
+  useEffect(() => {
+    if (initialIdGenerated && formValues.type && dynamicFormValues.length > 0) {
+      handleGetCustomFeed(formValues, dynamicFormValues)
+    }
+  }, [initialIdGenerated, formValues, dynamicFormValues])
+
+  const handleGenerateId = () => {
+    if (formValues.type && dynamicFormValues.length > 0) {
+      handleGetCustomFeed(formValues, dynamicFormValues)
+      setInitialIdGenerated(true)
+    }
+  }
+
   return (
     <div className="CustomFeedContainer">
       <RadioSelectCreateNew props="Custom" />
@@ -198,28 +229,21 @@ function CustomFeed() {
                 value={element.dataType}
                 onChange={(e) => handleDynamicChange(i, e)}
               >
-                <option value="" disabled>
-                  Select Data Type
-                </option>
-                <option value="address">address</option>
-                <option value="bool">bool</option>
-                <option value="bytes">bytes</option>
-                <option value="bytes32">bytes32</option>
+                <option value="">Select Data Type</option>
+                <option value="uint256">uint256</option>
                 <option value="int256">int256</option>
                 <option value="string">string</option>
-                <option value="uint256">uint256</option>
+                <option value="bool">bool</option>
+                <option value="address">address</option>
               </select>
               {dynamicFormValues[i].dataType === 'bool' ? (
                 <select
                   id="BoolDropdown"
                   name="argValue"
                   className="DynamicFormDropdown"
-                  value={element.argValue}
+                  value={element.argValue.toString()}
                   onChange={(e) => handleDynamicChange(i, e)}
                 >
-                  <option value="" disabled>
-                    Select Value
-                  </option>
                   <option value="true">true</option>
                   <option value="false">false</option>
                 </select>
@@ -255,11 +279,11 @@ function CustomFeed() {
           >
             Add Argument
           </button>
-          {dynamicFormValues.length > 0 ? (
+          {dynamicFormValues.length > 0 && !initialIdGenerated ? (
             <button
             disabled={formValues.type === ''}
             className={formValues.type !== '' ? 'Button' : 'ButtonDisabled'}
-            onClick={() => handleGetCustomFeed(formValues, dynamicFormValues)}
+            onClick={handleGenerateId}
           >
             Generate ID
           </button>
