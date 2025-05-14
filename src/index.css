@@ -1,12 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;700&display=swap');
 
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Neue Montreal';
   font-style: normal;
-  font-weight: normal;
-  src: local('Montserrat'),
-    url('./assets/Montserrat//Montserrat-SemiBold.woff') format('woff');
+  font-weight: 100;
+  src: local('Neue Montreal Thin'),
+    url('./fonts/Neue Montreal/PPNeueMontreal-Thin.otf') format('opentype');
 }
+
+@font-face {
+  font-family: 'Neue Montreal';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Neue Montreal Book'),
+    url('./fonts/Neue Montreal/PPNeueMontreal-Book.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Neue Montreal Medium'),
+    url('./fonts/Neue Montreal/PPNeueMontreal-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Neue Montreal SemiBold'),
+    url('./fonts/Neue Montreal/PPNeueMontreal-SemiBolditalic.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Neue Montreal Bold'),
+    url('./fonts/Neue Montreal/PPNeueMontreal-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Neue Montreal Italic'),
+    url('./fonts/Neue Montreal/PPNeueMontreal-Italic.otf') format('opentype');
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -96,7 +137,7 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Neue Montreal', sans-serif;
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
