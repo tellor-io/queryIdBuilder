@@ -1,23 +1,53 @@
 .Button {
-  font-family: 'Inconsolata' !important;
-  font-size: 16px;
-  padding: 4px 25px 8px 25px;
-  background-color: transparent;
-  border: 2px solid #20f092;
-  color: rgb(31, 239, 146);
+  font-family: var(--font-sans) !important;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  background: var(--app-accent);
+  border: 0;
+  border-radius: 9999px;
+  color: var(--pine-50);
   text-align: center;
+  cursor: pointer;
+  transition: all 0.12s var(--ease-standard);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
+
+[class$='Hero'] .Button {
+  background: var(--emerald-500);
+  color: var(--pine-950);
+}
+
+[class$='Hero'] .Button:hover {
+  background: var(--emerald-400);
+}
+
 .ButtonDisabled {
-  font-family: 'Inconsolata' !important;
-  font-size: 16px;
-  padding: 4px 25px 8px 25px;
-  background-color: transparent;
-  border: 2px solid #4b4b4b;
-  color: #4b4b4b;
+  font-family: var(--font-sans) !important;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  background: var(--app-surface-2);
+  border: 1px solid var(--app-border);
+  border-radius: 9999px;
+  color: var(--app-fg-subtle);
+  text-align: center;
+  cursor: not-allowed;
 }
+
+[class$='Hero'] .ButtonDisabled {
+  background: var(--hero-input-bg);
+  border-color: var(--hero-input-border);
+  color: var(--hero-input-placeholder);
+}
+
 .Button:hover {
   cursor: pointer;
+  background: var(--pine-800);
 }
+
 .ButtonDisabled:hover {
   cursor: not-allowed;
 }

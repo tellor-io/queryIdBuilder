@@ -1,61 +1,216 @@
 .DataDecoderContainer {
-    margin-top: 50px;
-    display: flex;
-  }
-  .DataDecoderHeroContainer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    
-  }
-  .DataDecoderHero {
-    max-width: 100%;
-    box-sizing: border-box;
-    width: 100%;
-    height: -moz-fit-content;
-    height: fit-content;
-    border-left: 2px solid #3bedb5;
-    padding: 8px;
-    padding-left: 20px;
-    
-  }
-  .DataDecoderJSON {
-    display: flex;
-    align-items: baseline;
-    margin-bottom: 15px;
-    font-weight: 300;
-    width: fit-content;
-  }
-  .DataDecoderJSON > p > span {
-    font-weight: 700;
-    
-  }
-  .DataDecoderInput {
-    font-family: 'Neue Montreal', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    width: 45px;
-    height: 22px;
-    padding-left: 5px;
-    padding-top: 2px;
-    border: none;
-    background-color: rgba(32, 240, 146, 0.2);
-    border-bottom: 2px solid #20f092;
-    color: #ffffff;
-    caret-color: #ffffff;
-    
-  }
-  .DataDecoderInput:focus {
-    outline-color: #20f092;
-    outline-width: 1px;
-    
-  }
-  .DataDecoderResults {
-    max-width: 75%;
-    box-sizing: border-box;
-    width: 100%;
-    height: fit-content;
-    border: 2px solid #ffffff;
-    padding: 12px 12px 0px 20px;
-    margin-top: 30px;
-  }
+  margin-top: 0;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.DataDecoderHeroContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.DataDecoderHero {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  height: fit-content;
+  background: var(--hero-bg);
+  border: 1px solid var(--hero-border);
+  border-radius: 16px;
+  border-left: 3px solid var(--emerald-500);
+  padding: 20px 24px;
+  color: var(--hero-fg);
+  display: block;
+}
+
+.DataDecoderHero > * {
+  margin-bottom: 12px;
+}
+
+.DataDecoderHero > *:last-child {
+  margin-bottom: 0;
+}
+
+.DataDecoderHero > h4 {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hero-fg);
+  margin: 16px 0 0;
+}
+
+.DataDecoderHero > h4:first-of-type {
+  margin-top: 0;
+}
+
+.DataDecoderHero > h5:empty {
+  display: none;
+}
+
+.DataDecoderHero input[type='text'] {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  width: 100%;
+  max-width: 560px;
+  height: 36px;
+  padding: 8px 14px;
+  border: 1px solid var(--hero-input-border);
+  border-radius: 9999px;
+  background: var(--hero-input-bg);
+  color: var(--hero-input-fg);
+  caret-color: var(--emerald-500);
+}
+
+.DataDecoderHero #SolTypeStr {
+  width: 160px;
+  max-width: 160px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+.DataDecoderHero #SolTypeStr + span {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-bottom: 12px;
+}
+
+.DataDecoderHero #SolTypeStr + .CopyToClipboardIcon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 12px;
+}
+
+.DataDecoderHero input[type='text']:focus {
+  outline: none;
+  border-color: var(--emerald-500);
+  box-shadow: 0 0 0 3px var(--app-glow);
+}
+
+.DataDecoderHero input[type='text']::placeholder {
+  color: var(--hero-input-placeholder);
+}
+
+.DataDecoderHero button {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  background: var(--emerald-500);
+  border: 0;
+  border-radius: 9999px;
+  color: var(--pine-950);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.12s var(--ease-standard);
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.DataDecoderHero button:hover {
+  background: var(--emerald-400);
+}
+
+.DataDecoderHero pre {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  background: var(--hero-code-bg);
+  border: 1px solid var(--hero-input-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  color: var(--hero-fg);
+  line-height: 1.65;
+  margin: 8px 0 0;
+  max-width: 100%;
+}
+
+.DataDecoderHero pre:empty {
+  display: none;
+}
+
+.DataDecoderHero br {
+  display: none;
+}
+
+.DataDecoderHero .CopyToClipboardIcon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  opacity: 1;
+  filter: brightness(0) saturate(100%) invert(58%) sepia(70%) saturate(650%)
+    hue-rotate(115deg) brightness(98%) contrast(95%);
+  transition: all 0.12s var(--ease-standard);
+  cursor: pointer;
+}
+
+.DataDecoderHero .CopyToClipboardIcon:hover {
+  transform: scale(1.1);
+  filter: brightness(0) saturate(100%) invert(75%) sepia(61%) saturate(500%)
+    hue-rotate(110deg) brightness(102%) contrast(98%);
+}
+
+.DataDecoderJSON {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--app-fg-muted);
+  width: fit-content;
+}
+
+.DataDecoderJSON > p > span {
+  font-weight: 600;
+  color: var(--opal-600);
+}
+
+.DataDecoderInput {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  width: 60px;
+  height: 28px;
+  padding: 4px 10px;
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  background: var(--app-surface-2);
+  color: var(--app-fg);
+  caret-color: var(--emerald-500);
+}
+
+.DataDecoderInput:focus {
+  outline: none;
+  border-color: var(--emerald-500);
+  box-shadow: 0 0 0 3px var(--app-glow);
+}
+
+.DataDecoderResults {
+  max-width: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  height: fit-content;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-top: 20px;
+}
