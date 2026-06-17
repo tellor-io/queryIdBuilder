@@ -5,70 +5,101 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: #262626;
-  color: #ffffff;
-  font-family: 'Neue Montreal', sans-serif;
-  padding-bottom: 100px;
+  align-items: stretch;
+  background-color: var(--app-bg);
+  color: var(--app-fg);
+  font-family: var(--font-sans);
   overflow-x: auto;
 }
+
 .Nav {
-  width: 100%;
-  margin: 3%;
-  padding-left: 3%;
   display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  height: 64px;
+  padding: 0 28px;
+  margin: 0;
+  border-bottom: 1px solid var(--app-border-soft);
+  background: var(--app-bg);
   box-sizing: border-box;
+  position: relative;
+  z-index: 5;
 }
+
 .Nav > a > img {
-  width: 150px;
+  width: 120px;
+  height: auto;
+  filter: brightness(0) saturate(100%) invert(12%) sepia(28%) saturate(2476%)
+    hue-rotate(141deg) brightness(95%) contrast(101%);
 }
+
 .BodyContainer {
   width: 100%;
-  padding: 0px 100px 0 200px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 36px 40px;
   box-sizing: border-box;
 }
+
 .BodyHeader {
-  font-family: 'Neue Montreal', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 700;
-  font-size: 51px;
-  line-height: 62px;
-  margin-top: 40px;
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 8px;
+  color: var(--app-fg);
 }
+
 .BodyDescription {
-  font-family: 'Neue Montreal', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
-  padding: 20px 40px 40px 0;
-  font-size: 18px;
-  font-style: normal;
-  line-height: 28px;
-  letter-spacing: 0px;
+  padding: 0 0 28px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--app-fg-muted);
+  max-width: 60ch;
   text-align: left;
 }
+
 .DescriptionLink {
-  color: #20f092;
+  color: var(--emerald-700);
   text-decoration: none;
+  font-weight: 500;
 }
+
+.DescriptionLink:hover {
+  color: var(--emerald-500);
+}
+
 .HeroNavLinks {
   display: flex;
   line-height: 28px;
 }
+
 .HeroNavLinks > a {
-  color: #ffffff;
+  color: var(--app-fg);
   margin-right: 35px;
 }
+
 .ActiveLink {
   padding-bottom: 3px;
   text-decoration: none;
-  border-bottom: 2px solid #20f092;
+  border-bottom: 2px solid var(--emerald-500);
+  color: var(--app-fg);
+  font-weight: 600;
 }
+
 .InactiveLink {
   padding-bottom: 3px;
   text-decoration: none;
-  border-bottom: 2px solid #4b4b4b;
-  opacity: 80%;
+  border-bottom: 2px solid var(--app-border);
+  color: var(--app-fg-muted);
 }
+
 .HeroSection {
-  margin-top: 10px;
+  margin-top: 0;
   height: fit-content;
   overflow: visible;
 }
@@ -76,8 +107,10 @@
 .Form {
   width: 50%;
   height: auto;
-  padding: 1% 0;
-  border: 1px solid black;
+  padding: 20px 24px;
+  border: 1px solid var(--app-border);
+  border-radius: 16px;
+  background: var(--app-surface);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,10 +121,12 @@
   width: 90%;
   margin: 1% 0;
 }
+
 .Form > select {
   width: 90%;
   margin: 1% 0;
 }
+
 .Form > button {
   width: 30%;
   margin: 1% 0;
@@ -108,9 +143,11 @@
 .resultsContainer {
   width: 50%;
   height: auto;
-  padding: 1% 0;
+  padding: 20px 24px;
   margin-top: 2%;
-  /* border: 1px solid black; */
+  border: 1px solid var(--app-border);
+  border-radius: 16px;
+  background: var(--app-surface);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,7 +155,6 @@
 }
 
 .results {
-  /* border: 1px solid red; */
   width: 100%;
   overflow-wrap: break-word;
   display: flex;

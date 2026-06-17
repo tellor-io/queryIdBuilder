@@ -1,37 +1,69 @@
 .RadioSelectCreateNew {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  min-width: fit-content;
-  height: 150px;
-  margin-right: 22px;
+  justify-content: flex-start;
+  gap: 4px;
+  min-width: 220px;
+  max-width: 240px;
+  height: auto;
+  margin-right: 28px;
+  padding: 24px 16px;
+  border-right: 1px solid var(--app-border-soft);
+  flex-shrink: 0;
 }
+
 .SelectionCreateNew {
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;
   align-items: center;
+  gap: 12px;
   text-decoration: none;
-  color: #ffffff;
+  color: var(--app-fg);
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 12px;
+  transition: background 0.12s var(--ease-standard);
 }
+
+.SelectionCreateNew:hover {
+  background: var(--opal-100);
+}
+
 .RadioButtonCreateNew {
-  border: 1px solid #ffffff;
+  border: 1px solid var(--emerald-700);
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  margin-right: 6px;
+  margin-right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
+  background: var(--app-surface);
 }
+
 .RadioButtonCreateNewInner {
   display: none;
-  width: 8px;
-  height: 8px;
-  background-color: #20f092;
+  width: 6px;
+  height: 6px;
+  background-color: var(--emerald-700);
   border-radius: 50%;
 }
 
-/* createNew DISPLAY */
+.SelectionCreateNew:has(.createNewDisplay) {
+  background: var(--pine-950);
+  color: var(--pine-50);
+}
+
+.SelectionCreateNew:has(.createNewDisplay) .RadioButtonCreateNew {
+  border-color: rgba(238, 255, 251, 0.3);
+}
+
+.SelectionCreateNew:has(.createNewDisplay) .RadioButtonCreateNewInner {
+  background-color: var(--emerald-500);
+}
+
 .createNewDisplay {
-  display: flex;
+  display: block;
 }

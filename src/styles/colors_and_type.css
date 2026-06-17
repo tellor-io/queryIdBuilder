@@ -1,0 +1,69 @@
+/* Tellor design system tokens (from mocks) */
+
+:root {
+  /* Pine */
+  --pine-50: #eefffb;
+  --pine-600: #14706b;
+  --pine-700: #0f5c58;
+  --pine-800: #0a4a47;
+  --pine-950: #003734;
+
+  /* Emerald */
+  --emerald-100: #d4fbe9;
+  --emerald-300: #4de8a8;
+  --emerald-400: #1fdb8f;
+  --emerald-500: #08d482;
+  --emerald-700: #06a864;
+  --emerald-800: #058a53;
+
+  /* Opal */
+  --opal-100: #e8f4f2;
+  --opal-200: #d1e8e5;
+  --opal-300: #9ac0c3;
+  --opal-400: #7aabae;
+  --opal-500: #6b928d;
+  --opal-600: #5a7d79;
+  --opal-700: #4a6966;
+
+  /* Neptune */
+  --neptune-300: #8fb6b2;
+
+  /* Semantic */
+  --danger: #e5484d;
+  --danger-bg: #fff0f0;
+
+  /* Gradients & effects */
+  --grad-emerald: linear-gradient(135deg, #08d482 0%, #1fdb8f 50%, #4de8a8 100%);
+  --shadow-md: 0 4px 16px rgba(0, 55, 52, 0.08);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Typography */
+  --font-sans: 'Neue Montreal', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Inconsolata', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-wordmark: 'Neue Montreal', system-ui, sans-serif;
+
+  /* App surface tokens (light theme) */
+  --app-bg: var(--pine-50);
+  --app-fg: var(--pine-950);
+  --app-fg-muted: var(--opal-700);
+  --app-fg-subtle: var(--opal-500);
+  --app-surface: #ffffff;
+  --app-surface-2: var(--pine-50);
+  --app-border: var(--opal-200);
+  --app-border-soft: var(--opal-100);
+  --app-accent: var(--pine-950);
+  --app-emerald: var(--emerald-500);
+  --app-glow: rgba(8, 212, 130, 0.18);
+
+  /* Hero form cards */
+  --hero-bg: var(--pine-950);
+  --hero-fg: #ffffff;
+  --hero-fg-muted: #ffffff;
+  --hero-fg-subtle: #ffffff;
+  --hero-border: var(--pine-800);
+  --hero-input-bg: var(--app-bg);
+  --hero-input-fg: var(--app-fg);
+  --hero-input-placeholder: var(--app-fg-subtle);
+  --hero-input-border: var(--opal-200);
+  --hero-code-bg: rgba(0, 0, 0, 0.2);
+}

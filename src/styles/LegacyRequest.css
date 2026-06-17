@@ -1,59 +1,74 @@
 .CreateNewLegacyRequestContainer {
-  margin-top: 50px;
+  margin-top: 0;
   display: flex;
+  align-items: flex-start;
 }
-.CreateNewLegacyRequestContainer {
-  margin-top: 50px;
-  display: flex;
-}
+
 .LegacyRequestHeroContainer {
   display: flex;
   flex-direction: column;
-  width: 85%;
+  width: 100%;
+  min-width: 0;
 }
+
 .LegacyRequestHero {
   max-width: 100%;
   box-sizing: border-box;
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
-  border-left: 2px solid #ffffff;
-  padding: 8px;
-  padding-left: 20px;
+  background: var(--hero-bg);
+  border: 1px solid var(--hero-border);
+  border-radius: 16px;
+  border-left: 3px solid var(--emerald-500);
+  padding: 20px 24px;
+  color: var(--hero-fg);
 }
+
 .LegacyRequestJSON {
   display: flex;
   align-items: baseline;
-  margin-bottom: 15px;
-  font-weight: 300;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--hero-fg-muted);
   width: fit-content;
 }
+
 .LegacyRequestJSON > p > span {
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--hero-fg);
 }
+
 .LegacyRequestInput {
-  font-family: 'Neue Montreal', sans-serif;
-  font-size: 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
   font-weight: 400;
-  width: 45px;
-  height: 22px;
-  padding-left: 5px;
-  padding-top: 2px;
-  border: none;
-  background-color: rgba(32, 240, 146, 0.2);
-  border-bottom: 2px solid #20f092;
-  color: #ffffff;
-  caret-color: #ffffff;
+  width: 60px;
+  height: 28px;
+  padding: 4px 10px;
+  border: 1px solid var(--hero-input-border);
+  border-radius: 8px;
+  background: var(--hero-input-bg);
+  color: var(--hero-input-fg);
+  caret-color: var(--emerald-500);
 }
+
 .LegacyRequestInput:focus {
-  outline-color: #20f092;
-  outline-width: 1px;
+  outline: none;
+  border-color: var(--emerald-500);
+  box-shadow: 0 0 0 3px var(--app-glow);
 }
+
 .LegacyRequestResults {
-  max-width: 90%;
+  max-width: 100%;
   box-sizing: border-box;
   height: fit-content;
-  border: 2px solid #ffffff;
-  padding: 12px 12px 0px 20px;
-  margin-top: 30px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-top: 20px;
 }
