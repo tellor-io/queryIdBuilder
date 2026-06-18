@@ -41,6 +41,22 @@
   --font-sans: 'Neue Montreal', system-ui, -apple-system, sans-serif;
   --font-mono: 'Inconsolata', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-wordmark: 'Neue Montreal', system-ui, sans-serif;
+  --font-size-xs: 0.8125rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 0.9375rem;
+  --font-size-base: 1rem;
+  --font-size-display: 2.5625rem;
+
+  /* Layout (scales with viewport) */
+  --layout-max-width: min(clamp(75rem, 88vw, 96rem), 100%);
+  --layout-gap: clamp(1rem, 1.5vw, 2rem);
+  --sidebar-width: clamp(13.75rem, 11rem + 6vw, 18rem);
+  --hero-flex-basis: clamp(28rem, 40vw, 44rem);
+  --hero-min-width: clamp(17.5rem, 28vw, 32rem);
+  --space-page-x: clamp(1rem, 3vw, 3.5rem);
+  --space-page-y: clamp(1.25rem, 2.5vw, 2.75rem);
+  --nav-height: clamp(4rem, 3.25rem + 1.5vw, 5rem);
+  --space-card: clamp(1.125rem, 1rem + 0.6vw, 1.75rem);
 
   /* App surface tokens (light theme) */
   --app-bg: var(--pine-50);

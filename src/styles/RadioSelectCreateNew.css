@@ -3,11 +3,12 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 4px;
-  min-width: 220px;
-  max-width: 240px;
+  min-width: min(var(--sidebar-width), 100%);
+  max-width: var(--sidebar-width);
+  flex: 0 1 var(--sidebar-width);
   height: auto;
-  margin-right: 28px;
-  padding: 24px 16px;
+  margin-right: 0;
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem) clamp(0.875rem, 0.75rem + 0.5vw, 1.25rem);
   border-right: 1px solid var(--app-border-soft);
   flex-shrink: 0;
 }
@@ -20,7 +21,7 @@
   text-decoration: none;
   color: var(--app-fg);
   padding: 10px 12px;
-  font-size: 13px;
+  font-size: var(--font-size-md);
   font-weight: 500;
   border-radius: 12px;
   transition: background 0.12s var(--ease-standard);

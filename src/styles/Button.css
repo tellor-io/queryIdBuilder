@@ -1,6 +1,6 @@
 .Button {
   font-family: var(--font-sans) !important;
-  font-size: 13px;
+  font-size: var(--font-size-md);
   font-weight: 600;
   padding: 10px 16px;
   background: var(--app-accent);
@@ -26,7 +26,7 @@
 
 .ButtonDisabled {
   font-family: var(--font-sans) !important;
-  font-size: 13px;
+  font-size: var(--font-size-md);
   font-weight: 600;
   padding: 10px 16px;
   background: var(--app-surface-2);

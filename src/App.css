@@ -1,6 +1,7 @@
 .App {
   flex: 1;
-  max-height: 100%;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   text-align: left;
   display: flex;
@@ -9,7 +10,7 @@
   background-color: var(--app-bg);
   color: var(--app-fg);
   font-family: var(--font-sans);
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 .Nav {
@@ -17,8 +18,8 @@
   align-items: center;
   gap: 16px;
   width: 100%;
-  height: 64px;
-  padding: 0 28px;
+  height: var(--nav-height);
+  padding: 0 var(--space-page-x);
   margin: 0;
   border-bottom: 1px solid var(--app-border-soft);
   background: var(--app-bg);
@@ -28,24 +29,24 @@
 }
 
 .Nav > a > img {
-  width: 120px;
+  width: clamp(7.5rem, 6rem + 4vw, 9rem);
   height: auto;
-  filter: brightness(0) saturate(100%) invert(12%) sepia(28%) saturate(2476%)
-    hue-rotate(141deg) brightness(95%) contrast(101%);
+  display: block;
 }
 
 .BodyContainer {
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--layout-max-width);
+  flex: 1;
   margin: 0 auto;
-  padding: 28px 36px 40px;
+  padding: var(--space-page-y) var(--space-page-x) clamp(1.75rem, 4vw, 3rem);
   box-sizing: border-box;
 }
 
 .BodyHeader {
   font-family: var(--font-sans);
   font-weight: 700;
-  font-size: 36px;
+  font-size: clamp(1.75rem, 1.1rem + 2.2vw, 3.25rem);
   line-height: 1.05;
   letter-spacing: -0.015em;
   margin: 0 0 8px;
@@ -56,10 +57,10 @@
   font-family: var(--font-sans);
   font-weight: 400;
   padding: 0 0 28px;
-  font-size: 14px;
+  font-size: var(--font-size-base);
   line-height: 1.5;
   color: var(--app-fg-muted);
-  max-width: 60ch;
+  max-width: min(60ch, 100%);
   text-align: left;
 }
 
@@ -100,8 +101,59 @@
 
 .HeroSection {
   margin-top: 0;
+  width: 100%;
+  min-width: 0;
   height: fit-content;
   overflow: visible;
+}
+
+.CreateNewSpotPriceContainer,
+.CreateNewAWSSpotPriceContainer,
+.CreateNewDivaProtocolPolygonContainer,
+.CreateNewLeagueDAOContainer,
+.CreateNewLegacyRequestContainer,
+.CustomFeedContainer,
+.DataDecoderContainer,
+.SelectFeedContainer {
+  width: 100%;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: var(--layout-gap);
+}
+
+.SpotPriceHeroContainer,
+.AWSSpotPriceHeroContainer,
+.DivaProtocolPolygonHeroContainer,
+.LeagueDAOHeroContainer,
+.LegacyRequestHeroContainer,
+.CustomFeedHeroContainer,
+.DataDecoderHeroContainer,
+.SelectFeedResults {
+  flex: 1 1 var(--hero-flex-basis);
+  min-width: min(100%, var(--hero-min-width));
+}
+
+@media (max-width: 768px) {
+  .RadioSelectCreateNew,
+  .RadioSelect {
+    max-width: 100%;
+    flex: 1 1 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--app-border-soft);
+    margin-right: 0;
+    padding-bottom: 16px;
+  }
+
+  .CreateNewSpotPriceContainer,
+  .CreateNewAWSSpotPriceContainer,
+  .CreateNewDivaProtocolPolygonContainer,
+  .CreateNewLeagueDAOContainer,
+  .CreateNewLegacyRequestContainer,
+  .CustomFeedContainer,
+  .DataDecoderContainer,
+  .SelectFeedContainer {
+    flex-direction: column;
+  }
 }
 
 .Form {

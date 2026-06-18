@@ -10,7 +10,7 @@ export const CustomTooltip = styled(({ className, ...props }) => (
   },
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    fontSize: '14px',
+    fontSize: '1rem',
     fontFamily: 'Inconsolata',
     color: '#20f092',
   },

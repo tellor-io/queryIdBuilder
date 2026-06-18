@@ -2,6 +2,8 @@
   margin-top: 0;
   display: flex;
   align-items: flex-start;
+  width: 100%;
+  min-width: 0;
 }
 
 .LegacyRequestHeroContainer {
@@ -9,6 +11,7 @@
   flex-direction: column;
   width: 100%;
   min-width: 0;
+  flex: 1 1 var(--hero-flex-basis);
 }
 
 .LegacyRequestHero {
@@ -20,7 +23,7 @@
   border: 1px solid var(--hero-border);
   border-radius: 16px;
   border-left: 3px solid var(--emerald-500);
-  padding: 20px 24px;
+  padding: var(--space-card) calc(var(--space-card) * 1.15);
   color: var(--hero-fg);
 }
 
@@ -32,7 +35,7 @@
   margin-bottom: 16px;
   font-family: var(--font-mono);
   font-weight: 400;
-  font-size: 13px;
+  font-size: var(--font-size-md);
   color: var(--hero-fg-muted);
   width: fit-content;
 }
@@ -44,7 +47,7 @@
 
 .LegacyRequestInput {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: var(--font-size-md);
   font-weight: 400;
   width: 60px;
   height: 28px;
@@ -69,6 +72,6 @@
   background: var(--app-surface);
   border: 1px solid var(--app-border);
   border-radius: 16px;
-  padding: 20px 24px;
+  padding: var(--space-card) calc(var(--space-card) * 1.15);
   margin-top: 20px;
 }
