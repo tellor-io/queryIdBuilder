@@ -10,6 +10,7 @@
   flex-direction: column;
   width: 100%;
   min-width: 0;
+  flex: 1 1 var(--hero-flex-basis);
 }
 
 .DataDecoderHero {
@@ -23,7 +24,7 @@
   border: 1px solid var(--hero-border);
   border-radius: 16px;
   border-left: 3px solid var(--emerald-500);
-  padding: 20px 24px;
+  padding: var(--space-card) calc(var(--space-card) * 1.15);
   color: var(--hero-fg);
   display: block;
 }
@@ -38,7 +39,7 @@
 
 .DataDecoderHero > h4 {
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -56,7 +57,7 @@
 
 .DataDecoderHero input[type='text'] {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: var(--font-size-md);
   font-weight: 400;
   width: 100%;
   max-width: 560px;
@@ -103,7 +104,7 @@
 
 .DataDecoderHero button {
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: var(--font-size-md);
   font-weight: 600;
   padding: 10px 16px;
   background: var(--emerald-500);
@@ -125,7 +126,7 @@
 
 .DataDecoderHero pre {
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: var(--font-size-sm);
   background: var(--hero-code-bg);
   border: 1px solid var(--hero-input-border);
   border-radius: 12px;
@@ -173,7 +174,7 @@
   margin-bottom: 16px;
   font-family: var(--font-mono);
   font-weight: 400;
-  font-size: 13px;
+  font-size: var(--font-size-md);
   color: var(--app-fg-muted);
   width: fit-content;
 }
@@ -185,7 +186,7 @@
 
 .DataDecoderInput {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: var(--font-size-md);
   font-weight: 400;
   width: 60px;
   height: 28px;
@@ -211,6 +212,6 @@
   background: var(--app-surface);
   border: 1px solid var(--app-border);
   border-radius: 16px;
-  padding: 20px 24px;
+  padding: var(--space-card) calc(var(--space-card) * 1.15);
   margin-top: 20px;
 }

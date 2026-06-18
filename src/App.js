@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
-import TellorLogo from './assets/tellor_white.svg'
+import TellorLogo from './assets/tellor_logo.png'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import SelectFeed from './components/SelectFeed'
 import CustomFeed from './components/CustomFeed'
@@ -35,7 +35,7 @@ function App() {
     <div className="App">
       <nav className="Nav">
         <a href="https://tellor.io/">
-          <img src={TellorLogo} alt="TellorLogo" />
+          <img src={TellorLogo} alt="Tellor logo" />
         </a>
       </nav>
       <div className="BodyContainer">
