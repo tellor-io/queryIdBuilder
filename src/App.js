@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
-import TellorLogo from './assets/tellor_logo.png'
+import QueryBuilderLogo from './assets/query_builder_logo.png'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import SelectFeed from './components/SelectFeed'
 import CustomFeed from './components/CustomFeed'
@@ -35,24 +35,32 @@ function App() {
     <div className="App">
       <nav className="Nav">
         <a href="https://tellor.io/">
-          <img src={TellorLogo} alt="Tellor logo" />
+          <img src={QueryBuilderLogo} alt="Tellor Query Builder" />
         </a>
       </nav>
       <div className="BodyContainer">
-        <h1 className="BodyHeader">Query ID Station</h1>
+        <header className="DictEntry">
+          <h1 className="DictHeadword">query id</h1>
+          <p className="DictMeta">
+            <span className="DictPhonetic">/ˈkwɪə.ri aɪˈdiː/</span>
+            <span className="DictPos">noun</span>
+          </p>
+        </header>
         <p className="BodyDescription">
-        A 'query id' is the unique identifier of a 'query type' for data that's requested, 
-          reported, and retrieved by Tellor oracles. Use the tools below to generate a query id for your data, or decode an already submitted value. <br></br><br></br>For 
-          a more detailed explanation of queries, see {' '}
+          A 'query id' is the unique identifier unique identifier of a
+          &lsquo;query type&rsquo; for data that&apos;s requested, reported, and
+          retrieved by Tellor oracles. Use the tools below to generate a query
+          id for your data, or decode an already submitted value.
+          For a more detailed explanation of queries, see{' '}
           <a
             className="DescriptionLink"
             href="https://github.com/tellor-io/dataSpecs"
             target="_blank"
             rel="noopener noreferrer"
           >
-            this 'data specs' repo
+            this &lsquo;data specs&rsquo; repo
           </a>
-            .
+          .
         </p>
         
         <Router>

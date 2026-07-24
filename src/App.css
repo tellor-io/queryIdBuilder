@@ -29,8 +29,8 @@
 }
 
 .Nav > a > img {
-  width: clamp(7.5rem, 6rem + 4vw, 9rem);
-  height: auto;
+  height: clamp(2.25rem, 1.75rem + 1.5vw, 3rem);
+  width: auto;
   display: block;
 }
 
@@ -43,14 +43,49 @@
   box-sizing: border-box;
 }
 
-.BodyHeader {
+.DictEntry {
+  margin: 0 0 10px;
+}
+
+.DictHeadword {
   font-family: var(--font-sans);
   font-weight: 700;
-  font-size: clamp(1.75rem, 1.1rem + 2.2vw, 3.25rem);
+  font-size: clamp(2rem, 1.35rem + 1.2vw, 3.25rem);
   line-height: 1.05;
-  letter-spacing: -0.015em;
-  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+  margin: 0;
   color: var(--app-fg);
+  font-style: italic;
+}
+
+.DictMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem 0.85rem;
+  margin: 0.45rem 0 0;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  color: var(--app-fg-subtle);
+}
+
+.DictPhonetic {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  letter-spacing: 0.01em;
+}
+
+.DictPos {
+  font-style: italic;
+  color: var(--app-fg-muted);
+}
+
+.DictPos::before {
+  content: '·';
+  margin-right: 0.85rem;
+  font-style: normal;
+  color: var(--app-fg-subtle);
 }
 
 .BodyDescription {
@@ -60,8 +95,14 @@
   font-size: var(--font-size-base);
   line-height: 1.5;
   color: var(--app-fg-muted);
-  max-width: min(60ch, 100%);
+  max-width: 100%;
   text-align: left;
+}
+
+.DictSense {
+  font-weight: 600;
+  color: var(--app-fg);
+  margin-right: 0.35rem;
 }
 
 .DescriptionLink {
